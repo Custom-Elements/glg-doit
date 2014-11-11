@@ -1,13 +1,22 @@
 @import "../node_modules/ui-styles/variables";
 @import "../node_modules/ui-styles/visual-elements";
 :host {
-  display: block;
   position: relative;
   .full;
+  display: flex;
+  flex-direction: column;
   #tasknavigation {
     width: 100%;
   }
   #taskview {
     flex: 1;
+  }
+  #filler {
+    flex: 1;
+    background-color: red;
+  }
+  ui-pages {
+    .border;
+    border-top: 0;
   }
 }
