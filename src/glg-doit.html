@@ -1,12 +1,39 @@
 <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome.less">
-<link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
 <link rel="import" href="../node_modules/ui-pages/src/ui-pages.html">
 <link rel="import" href="../node_modules/ui-tab/src/ui-tab.html">
 <link rel="import" href="../node_modules/ui-typeahead/src/ui-typeahead.html">
 <link rel="import" href="../node_modules/ui-input/src/ui-input.html">
-<polymer-element name="glg-doit" attributes="">
+<polymer-element name="glg-doit" attributes="taskview">
 <template>
+  <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
+  <section flex auto center-center vertical layout>
+    <ui-input id="search" placeholder="Search tasks" borderless>
+      <icon search></icon>
+    </ui-input>
+    <ui-tabs id="tasknavigation" value="{{taskview}}">
+      <ui-tab value="your">
+        <span>Your Tasks</span>
+      </ui-tab>
+      <ui-tab value="delegated">
+        <span>Delegated</span>
+      </ui-tab>
+      <ui-tab value="complete">
+        <span>Complete</span>
+      </ui-tab>
+    </ui-tabs>
+    <ui-pages id="taskview" value="{{taskview}}">
+      <ui-page value="your">
+        <p>your</p>
+      </ui-page>
+      <ui-page value="delegated">
+        <p>delegated</p>
+      </ui-page>
+      <ui-page value="complete">
+        <p>complete</p>
+      </ui-page>
+    </ui-pages>
+  </section>
   <content></content>
 </template>
 <script src="./glg-doit.litcoffee"></script>

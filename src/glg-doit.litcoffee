@@ -8,6 +8,8 @@
 *TODO* describe the custom event `name` and `detail` that are fired.
 
 ##Attributes and Change Handlers
+###taskview
+This is the name of the view currently selected.
 
 ##Methods
 
@@ -20,7 +22,12 @@
       ready: ->
 
       attached: ->
+        @taskview = 'your'
 
       domReady: ->
 
       detached: ->
+
+      publish:
+        taskview:
+          reflect: true
