@@ -3,7 +3,9 @@
 <link rel="import" href="../node_modules/ui-tab/src/ui-tab.html">
 <link rel="import" href="../node_modules/ui-typeahead/src/ui-typeahead.html">
 <link rel="import" href="../node_modules/ui-input/src/ui-input.html">
-<polymer-element name="glg-doit" attributes="taskview">
+<link rel="import" href="../node_modules/ui-form/src/ui-form.html">
+<link rel="import" href="../node_modules/ui-avatar/src/ui-avatar.html">
+<polymer-element name="glg-doit" attributes="taskview data coworkers">
 <template>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
@@ -23,7 +25,27 @@
     </ui-tabs>
     <ui-pages id="taskview" value="{{taskview}}">
       <ui-page value="your">
-        <p>your</p>
+        <template repeat="{{task in data.your}}">
+          <ui-form>
+            <ui-input multiline="2" value="{{task.what}}">
+              <icon tasks></icon>
+            </ui-input>
+            <ui-input placeholder="When?" type="date" value="{{task.when}}">
+              <icon calendar></icon>
+            </ui-input>
+            <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}">
+              <icon user></icon>
+              <template value>
+                <value><ui-avatar name="{{name}}"></ui-avatar></value>
+              </template>
+              <template repeat="{{coworkers}}">
+                <ui-typeahead-item>
+                  <span>{{name}}</span>
+                </ui-typeahead-item>
+              </template>
+            </ui-typeahead>
+          </ui-form>
+        </template>
       </ui-page>
       <ui-page value="delegated">
         <p>delegated</p>

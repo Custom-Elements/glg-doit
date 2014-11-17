@@ -15,6 +15,7 @@
         margin: 1em;
         width: 20em;
       }
+
     </style>
   </head>
   <body unresolved>
@@ -23,6 +24,25 @@
     <script>
       document.addEventListener('polymer-ready', function() {
         //poke your element here
+        document.querySelector('glg-doit').data = {
+          your: [
+            {
+              who: [
+                {email: "lsylvetsky@glgroup.com", name: "Lauren Sylvetsky"}
+              ]
+              ,what: "Use some sockets\nto make some TPV"
+              ,when: "12/21/14"
+            }
+            ,{
+              who: [
+                {email: "rloebl@glgroup.com", name: "Rachel Loebl"}
+                ,{email: "lsylvetsky@glgroup.com", name: "Lauren Sylvetsky"}
+              ]
+              ,what: "Make some slides"
+              ,when: "12/21/14"
+            }
+          ]
+        }
       })
     </script>
   </body>

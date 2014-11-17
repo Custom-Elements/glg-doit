@@ -9,6 +9,7 @@
     "ui-pages": "git://github.com/custom-elements/ui-pages#master",
     "ui-styles": "git://github.com/custom-elements/ui-styles#master",
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
+    "ui-avatar": "git://github.com/custom-elements/ui-avatar#master",
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master"
   },
   "license": "ISC",
