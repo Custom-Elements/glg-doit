@@ -11,9 +11,27 @@
 ###taskview
 This is the name of the view currently selected.
 
+###coworkers
+Current search result of your coworkers.
+
 ##Methods
+###searchCoworkers
+Search for coworkers to delegate. This will trigger an autocomplete style
+search often, then present them for selection in the ui-typeahead via binding.
+
+      searchCoworkers: (evt, query) ->
+        console.log query
+        @$.coworkers.body = JSON.stringify
+          query:
+            match:
+              name: query.value
+        @$.coworkers.go()
 
 ##Event Handlers
+
+      coworkersResponse: (evt, detail)->
+        @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
+
 
 ##Polymer Lifecycle
 

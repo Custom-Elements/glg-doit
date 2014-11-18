@@ -5,8 +5,18 @@
 <link rel="import" href="../node_modules/ui-input/src/ui-input.html">
 <link rel="import" href="../node_modules/ui-form/src/ui-form.html">
 <link rel="import" href="../node_modules/ui-avatar/src/ui-avatar.html">
+<link rel="import" href="../lib/core-ajax.html">
 <polymer-element name="glg-doit" attributes="taskview data coworkers">
 <template>
+  <core-ajax
+    id="coworkers"
+    auto
+    method="POST"
+    url="https://services.glgresearch.com/cerca/employees/_search"
+    body='{"query":{"match":{"name":"balla"}}}'
+    handleAs="json"
+    withCredentials=true
+    on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
     <ui-input id="search" placeholder="Search tasks" borderless>
@@ -33,13 +43,14 @@
             <ui-input placeholder="When?" type="date" value="{{task.when}}">
               <icon calendar></icon>
             </ui-input>
-            <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}">
+            <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
               <icon user></icon>
               <template value>
                 <value><ui-avatar name="{{name}}"></ui-avatar></value>
               </template>
               <template repeat="{{coworkers}}">
                 <ui-typeahead-item>
+                  <ui-avatar name="{{name}}"></ui-avatar>
                   <span>{{name}}</span>
                 </ui-typeahead-item>
               </template>
