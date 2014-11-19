@@ -1,7 +1,7 @@
 #glg-doit
 *TODO* tell me all about your element.
 
-
+    moment = require 'moment'
     Polymer 'glg-doit',
 
 ##Events
@@ -15,6 +15,15 @@ This is the name of the view currently selected.
 Current search result of your coworkers.
 
 ##Methods
+###relativeDat
+Display filter for dates. Modern styling.
+
+      relativeDate: (value) ->
+        if value
+          moment(value).fromNow()
+        else
+          ""
+
 ###searchCoworkers
 Search for coworkers to delegate. This will trigger an autocomplete style
 search often, then present them for selection in the ui-typeahead via binding.

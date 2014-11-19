@@ -38,9 +38,9 @@
         <template repeat="{{task in data.your}}">
           <ui-form>
             <ui-input multiline="2" value="{{task.what}}">
-              <icon tasks></icon>
             </ui-input>
             <ui-input placeholder="When?" type="date" value="{{task.when}}">
+              <preview>{{task.when | relativeDate}}</preview>
               <icon calendar></icon>
             </ui-input>
             <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
