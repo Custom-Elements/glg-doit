@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome.less">
+<link rel="import" href="../node_modules/ui-typeahead/src/ui-typeahead.html">
+<link rel="import" href="../node_modules/ui-check/src/ui-check.html">
+<link rel="import" href="../node_modules/ui-input/src/ui-input.html">
+<link rel="import" href="../node_modules/ui-form/src/ui-form.html">
+<link rel="import" href="../node_modules/ui-avatar/src/ui-avatar.html">
+<link rel="import" href="../lib/core-ajax.html">
+<polymer-element name="glg-task" attributes="task coworkers">
+<template>
+  <core-ajax
+    id="coworkers"
+    auto
+    method="POST"
+    url="https://services.glgresearch.com/cerca/employees/_search"
+    body='{"query":{"match":{"name":"balla"}}}'
+    handleAs="json"
+    withCredentials=true
+    on-core-response="{{coworkersResponse}}"></core-ajax>
+  <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
+  <link rel="stylesheet" type="text/css" href="./glg-task.less">
+  <ui-form>
+    <ui-input multiline="2" value="{{task.what}}">
+      <icon complete><ui-check value="{{task.complete}}"></ui-check></icon>
+    </ui-input>
+    <ui-input placeholder="When?" type="date" value="{{task.when}}">
+      <preview>{{task.when | relativeDate}}</preview>
+      <icon calendar></icon>
+    </ui-input>
+    <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
+      <icon user></icon>
+      <template value>
+        <value><ui-avatar name="{{name}}"></ui-avatar></value>
+      </template>
+      <template repeat="{{coworkers}}">
+        <ui-typeahead-item>
+          <ui-avatar name="{{name}}"></ui-avatar>
+          <span>{{name}}</span>
+        </ui-typeahead-item>
+      </template>
+    </ui-typeahead>
+  </ui-form>
+</template>
+<script src="./glg-task.litcoffee"></script>
+</polymer-element>
