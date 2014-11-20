@@ -10,6 +10,8 @@
     "ui-input": "git://github.com/custom-elements/ui-input#master",
     "ui-pages": "git://github.com/custom-elements/ui-pages#master",
     "ui-styles": "git://github.com/custom-elements/ui-styles#master",
+    "ui-check": "git://github.com/custom-elements/ui-check#master",
+    "ui-markdown": "git://github.com/custom-elements/ui-markdown#master",
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master"
   },
