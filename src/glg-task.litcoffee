@@ -5,6 +5,11 @@ This is a single task UI.
     Polymer 'glg-task',
 
 ##Events
+###complete
+Fired when the task is complete.
+
+###incomplete
+Fired if you move the task back to not complete.
 
 ##Attributes and Change Handlers
 ###task
@@ -38,6 +43,18 @@ search often, then present them for selection in the ui-typeahead via binding.
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
 
+
+      completeChange: ->
+        anim = @animate [
+          {height: @clientHeight, opacity: 1, transform: 'translateX(0)', offset: 0}
+          {height: @clientHeight, opacity: 0, transform: 'translateX(2%)', offset: 0.5}
+          {height: 0, opacity: 0, transform: 'translateX(2%)', offset: 1}
+        ], duration: 500, easing: "0.5s cubic-bezier(0.4, 0.0, 1, 1)"
+        anim.onfinish = =>
+          if @task.complete
+            @fire 'complete', @task
+          else
+            @fire 'incomplete', @task
 
 ##Polymer Lifecycle
 

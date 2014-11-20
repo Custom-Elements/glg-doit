@@ -25,7 +25,7 @@
 {{task.what}}
       </ui-markdown>
       </preview>
-      <icon complete><ui-check value="{{task.complete}}"></ui-check></icon>
+      <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
     </ui-input>
     <ui-input placeholder="When?" type="date" value="{{task.when}}">
       <preview>{{task.when | relativeDate}}</preview>
