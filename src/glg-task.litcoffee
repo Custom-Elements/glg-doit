@@ -27,7 +27,6 @@ Search for coworkers to delegate. This will trigger an autocomplete style
 search often, then present them for selection in the ui-typeahead via binding.
 
       searchCoworkers: (evt, query) ->
-        console.log query
         @$.coworkers.body = JSON.stringify
           query:
             match:
