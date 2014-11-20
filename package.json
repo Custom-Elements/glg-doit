@@ -14,6 +14,7 @@
     "ui-markdown": "git://github.com/custom-elements/ui-markdown#master",
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
     "ui-check": "git://github.com/custom-elements/ui-check#master",
+    "ui-form": "git://github.com/custom-elements/ui-form#master",
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master"
   },
   "license": "ISC",
