@@ -22,7 +22,7 @@
         <div number>{{data.complete.length | todoNumber}}</div>
       </ui-tab>
     </ui-tabs>
-    <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="taskIncomplete">
+    <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
       <ui-page value="your">
         <template repeat="{{task in data.your}}">
           <glg-task task="{{task}}"></glg-task>

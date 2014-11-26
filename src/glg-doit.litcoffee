@@ -26,6 +26,14 @@ All about formatting the number of todos, which really means defaulting.
         _.flatten([your, delegated]).forEach (task) =>
           @data.complete.push task
 
+      taskIncomplete: (evt, task) ->
+        complete = _.remove @data.complete, (x) -> x is task
+        complete.forEach (task) =>
+          if task?.who?.length
+            @data.delegated.push task
+          else
+            @data.your.push task
+
 ##Polymer Lifecycle
 
       created: ->

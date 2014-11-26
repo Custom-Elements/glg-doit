@@ -43,7 +43,6 @@ search often, then present them for selection in the ui-typeahead via binding.
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
 
-
       completeChange: ->
         anim = @animate [
           {height: @clientHeight, opacity: 1, transform: 'translateX(0)', offset: 0}
@@ -51,6 +50,7 @@ search often, then present them for selection in the ui-typeahead via binding.
           {height: 0, opacity: 0, transform: 'translateX(2%)', offset: 1}
         ], duration: 500, easing: "0.5s cubic-bezier(0.4, 0.0, 1, 1)"
         anim.onfinish = =>
+          console.log 'complete change', @task, @task.complete
           if @task.complete
             @fire 'complete', @task
           else
