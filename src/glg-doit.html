@@ -1,6 +1,7 @@
 <link rel="import" href="../node_modules/ui-pages/src/ui-pages.html">
 <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome.less">
 <link rel="import" href="../node_modules/ui-tab/src/ui-tab.html">
+<link rel="import" href="../node_modules/ui-preview/src/ui-only-one-expanded.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data">
 <template>
@@ -22,23 +23,25 @@
         <div number>{{data.complete.length | todoNumber}}</div>
       </ui-tab>
     </ui-tabs>
-    <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
-      <ui-page value="your">
-        <template repeat="{{task in data.your}}">
-          <glg-task task="{{task}}"></glg-task>
-        </template>
-      </ui-page>
-      <ui-page value="delegated">
-        <template repeat="{{task in data.delegated}}">
-          <glg-task task="{{task}}"></glg-task>
-        </template>
-      </ui-page>
-      <ui-page value="complete">
-        <template repeat="{{task in data.complete}}">
-          <glg-task task="{{task}}"></glg-task>
-        </template>
-      </ui-page>
-    </ui-pages>
+    <ui-only-one-expanded>
+      <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
+        <ui-page value="your">
+          <template repeat="{{task in data.your}}">
+            <glg-task task="{{task}}"></glg-task>
+          </template>
+        </ui-page>
+        <ui-page value="delegated">
+          <template repeat="{{task in data.delegated}}">
+            <glg-task task="{{task}}"></glg-task>
+          </template>
+        </ui-page>
+        <ui-page value="complete">
+          <template repeat="{{task in data.complete}}">
+            <glg-task task="{{task}}"></glg-task>
+          </template>
+        </ui-page>
+      </ui-pages>
+    </ui-only-one-expanded>
 </template>
 <script src="./glg-doit.litcoffee"></script>
 </polymer-element>
