@@ -5,7 +5,7 @@
     "lodash": "^2.4.1",
     "moment": "^2.8.3",
     "polymer": "git://github.com/custom-elements/polymer#master",
-    "polymer-build": "",
+    "polymer-build": "git://github.com/custom-elements/polymer-tools#master",
     "ui-avatar": "git://github.com/custom-elements/ui-avatar#master",
     "ui-check": "git://github.com/custom-elements/ui-check#master",
     "ui-fonts": "git://github.com/custom-elements/ui-fonts#master",

@@ -4,6 +4,7 @@
 <link rel="import" href="../node_modules/ui-form/src/ui-form.html">
 <link rel="import" href="../node_modules/ui-avatar/src/ui-avatar.html">
 <link rel="import" href="../node_modules/ui-markdown/src/ui-markdown.html">
+<link rel="import" href="../node_modules/ui-preview/src/ui-preview.html">
 <link rel="import" href="../lib/core-ajax.html">
 <polymer-element name="glg-task" attributes="task coworkers">
 <template>
@@ -18,32 +19,39 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-form>
-    <ui-input multiline="2" value="{{task.what}}">
-      <preview>
-      <ui-markdown>
+  <ui-preview>
+    <preview>
+    </preview>
+    <full>
+      <ui-form>
+        <ui-input multiline="2" value="{{task.what}}">
+          <preview>
+          <ui-markdown>
+<!--markdown -- needs to not be indented-->
 {{task.what}}
-      </ui-markdown>
-      </preview>
-      <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
-    </ui-input>
-    <ui-input placeholder="When?" type="date" value="{{task.when}}">
-      <preview>{{task.when | relativeDate}}</preview>
-      <icon calendar></icon>
-    </ui-input>
-    <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
-      <icon user></icon>
-      <template value>
-        <value><ui-avatar name="{{name}}"></ui-avatar></value>
-      </template>
-      <template repeat="{{coworkers}}">
-        <ui-typeahead-item>
-          <ui-avatar name="{{name}}"></ui-avatar>
-          <span>{{name}}</span>
-        </ui-typeahead-item>
-      </template>
-    </ui-typeahead>
-  </ui-form>
+          </ui-markdown>
+          </preview>
+          <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+        </ui-input>
+        <ui-input placeholder="When?" type="date" value="{{task.when}}">
+          <preview>{{task.when | relativeDate}}</preview>
+          <icon calendar></icon>
+        </ui-input>
+        <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
+          <icon user></icon>
+          <template value>
+            <value><ui-avatar name="{{name}}"></ui-avatar></value>
+          </template>
+          <template repeat="{{coworkers}}">
+            <ui-typeahead-item>
+              <ui-avatar name="{{name}}"></ui-avatar>
+              <span>{{name}}</span>
+            </ui-typeahead-item>
+          </template>
+        </ui-typeahead>
+      </ui-form>
+    </full>
+  </ui-preview>
 </template>
 <script src="./glg-task.litcoffee"></script>
 </polymer-element>
