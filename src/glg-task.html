@@ -27,8 +27,8 @@
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
           <small horizontal spaced center layout>
-            <template repeat="{{task.who}}">
-              <ui-avatar name="{{name}}"></ui-avatar>
+            <template if="{{task.who}}">
+              <ui-avatar name="{{task.who.name}}"></ui-avatar>
             </template>
             <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
           </small>
@@ -49,7 +49,7 @@
             <preview>{{task.when | relativeDate}}</preview>
             <icon calendar></icon>
           </ui-input>
-          <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
+          <ui-typeahead id="multiple" placeholder="Delegate To?" value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
             <icon user></icon>
             <template value>
               <value><ui-avatar name="{{name}}"></ui-avatar></value>
