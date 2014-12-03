@@ -21,8 +21,8 @@
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
   <ui-preview on-expanded="{{startEditing}}">
     <preview>
-      <section horizontal padded layout>
-        <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+      <section horizontal spaced padded layout>
+        <ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check>
         <section vertical fill layout>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
@@ -36,8 +36,8 @@
       </section>
     </preview>
     <full>
-      <section horizontal padded layout>
-        <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+      <section horizontal spaced padded layout>
+        <ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check>
         <section vertical spaced fill layout>
           <ui-input id="what" multiline="2" value="{{task.what}}">
             <preview>
