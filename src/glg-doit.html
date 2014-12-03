@@ -23,12 +23,13 @@
         <div number>{{data.complete.length | todoNumber}}</div>
       </ui-tab>
     </ui-tabs>
-    <ui-only-one-expanded>
       <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
         <ui-page value="your">
-          <template repeat="{{task in data.your}}">
-            <glg-task task="{{task}}"></glg-task>
-          </template>
+          <ui-only-one-expanded>
+            <template repeat="{{task in data.your}}">
+              <glg-task task="{{task}}"></glg-task>
+            </template>
+          </ui-only-one-expanded>
         </ui-page>
         <ui-page value="delegated">
           <template repeat="{{task in data.delegated}}">
@@ -41,7 +42,6 @@
           </template>
         </ui-page>
       </ui-pages>
-    </ui-only-one-expanded>
 </template>
 <script src="./glg-doit.litcoffee"></script>
 </polymer-element>

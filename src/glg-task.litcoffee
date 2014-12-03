@@ -56,6 +56,9 @@ search often, then present them for selection in the ui-typeahead via binding.
           else
             @fire 'incomplete', @task
 
+      startEditing: ->
+        @$.what.focus()
+
 ##Polymer Lifecycle
 
       created: ->

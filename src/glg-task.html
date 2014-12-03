@@ -19,48 +19,50 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-preview>
+  <ui-preview on-expanded="{{startEditing}}">
     <preview>
-      <ui-form>
-        <section horizontal layout>
-          <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+      <section horizontal padded layout>
+        <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+        <section vertical fill layout>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
+          <small horizontal spaced center layout>
+            <template repeat="{{task.who}}">
+              <ui-avatar name="{{name}}"></ui-avatar>
+            </template>
+            {{task.when | relativeDate}}
+          </small>
         </section>
-        <small horizontal spaced layout>
-          <template repeat="{{task.who}}">
-            <ui-avatar name="{{name}}"></ui-avatar>
-          </template>
-          {{task.when | relativeDate}}
-        </small>
-      </ui-form>
+      </section>
     </preview>
     <full>
-      <ui-form>
-        <ui-input multiline="2" value="{{task.what}}">
-          <preview>
-            <ui-markdown value="{{task.what}}">
-            </ui-markdown>
-          </preview>
-          <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
-        </ui-input>
-        <ui-input placeholder="When?" type="date" value="{{task.when}}">
-          <preview>{{task.when | relativeDate}}</preview>
-          <icon calendar></icon>
-        </ui-input>
-        <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
-          <icon user></icon>
-          <template value>
-            <value><ui-avatar name="{{name}}"></ui-avatar></value>
-          </template>
-          <template repeat="{{coworkers}}">
-            <ui-typeahead-item>
-              <ui-avatar name="{{name}}"></ui-avatar>
-              <span>{{name}}</span>
-            </ui-typeahead-item>
-          </template>
-        </ui-typeahead>
-      </ui-form>
+      <section horizontal padded layout>
+        <icon complete><ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check></icon>
+        <section vertical spaced fill layout>
+          <ui-input id="what" multiline="2" value="{{task.what}}">
+            <preview>
+              <ui-markdown value="{{task.what}}">
+              </ui-markdown>
+            </preview>
+          </ui-input>
+          <ui-input placeholder="When?" type="date" value="{{task.when}}">
+            <preview>{{task.when | relativeDate}}</preview>
+            <icon calendar></icon>
+          </ui-input>
+          <ui-typeahead id="multiple" placeholder="Who?" multiselect value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
+            <icon user></icon>
+            <template value>
+              <value><ui-avatar name="{{name}}"></ui-avatar></value>
+            </template>
+            <template repeat="{{coworkers}}">
+              <ui-typeahead-item>
+                <ui-avatar name="{{name}}"></ui-avatar>
+                <span>{{name}}</span>
+              </ui-typeahead-item>
+            </template>
+          </ui-typeahead>
+        </section>
+      </section>
     </full>
   </ui-preview>
 </template>
