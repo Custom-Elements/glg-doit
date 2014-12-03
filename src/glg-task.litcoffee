@@ -27,6 +27,13 @@ Display filter for dates. Modern styling.
         else
           ""
 
+###due
+Style things with this filter.
+
+      due: (at) ->
+        if at < Date.now()
+          "red"
+
 ###searchCoworkers
 Search for coworkers to delegate. This will trigger an autocomplete style
 search often, then present them for selection in the ui-typeahead via binding.

@@ -30,7 +30,7 @@
             <template repeat="{{task.who}}">
               <ui-avatar name="{{name}}"></ui-avatar>
             </template>
-            {{task.when | relativeDate}}
+            <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
           </small>
         </section>
       </section>
@@ -45,7 +45,7 @@
               </ui-markdown>
             </preview>
           </ui-input>
-          <ui-input placeholder="When?" type="date" value="{{task.when}}">
+          <ui-input placeholder="When?" type="date" value="{{task.when}}" class="{{due(task.when)}}">
             <preview>{{task.when | relativeDate}}</preview>
             <icon calendar></icon>
           </ui-input>
