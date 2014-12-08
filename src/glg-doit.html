@@ -2,9 +2,14 @@
 <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome.less">
 <link rel="import" href="../node_modules/ui-tab/src/ui-tab.html">
 <link rel="import" href="../node_modules/ui-preview/src/ui-only-one-expanded.html">
+<link rel="import" href="../node_modules/glg-current-user/src/glg-current-user.html">
+<link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data">
 <template>
+  <event-trap vertical layout on-task="{{processTask}}">
+  <glg-current-user username="glgroup\wballard"></glg-current-user>
+  <core-custom-event-client id="bus"></core-custom-event-client>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
     <ui-input id="search" placeholder="Search tasks" borderless>
       <icon search></icon>
@@ -12,7 +17,7 @@
     <ui-tabs id="tasknavigation" value="{{taskview}}">
       <ui-tab value="your">
         <div>Your Tasks</div>
-        <div number>{{data.your.length | todoNumber}}</div>
+        <div number>{{data.todo.length | todoNumber}}</div>
       </ui-tab>
       <ui-tab value="delegated">
         <div>Delegated</div>
@@ -20,28 +25,29 @@
       </ui-tab>
       <ui-tab value="complete">
         <div>Complete</div>
-        <div number>{{data.complete.length | todoNumber}}</div>
+        <div number>{{data.done.length | todoNumber}}</div>
       </ui-tab>
     </ui-tabs>
-      <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
-        <ui-page value="your">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.your}}">
-              <glg-task task="{{task}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-        <ui-page value="delegated">
-          <template repeat="{{task in data.delegated}}">
+    <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
+      <ui-page value="your">
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.todo}}">
             <glg-task task="{{task}}"></glg-task>
           </template>
-        </ui-page>
-        <ui-page value="complete">
-          <template repeat="{{task in data.complete}}">
-            <glg-task task="{{task}}"></glg-task>
-          </template>
-        </ui-page>
-      </ui-pages>
+        </ui-only-one-expanded>
+      </ui-page>
+      <ui-page value="delegated">
+        <template repeat="{{task in data.delegated}}">
+          <glg-task task="{{task}}"></glg-task>
+        </template>
+      </ui-page>
+      <ui-page value="complete">
+        <template repeat="{{task in data.done}}">
+          <glg-task task="{{task}}"></glg-task>
+        </template>
+      </ui-page>
+    </ui-pages>
+  </event-trap>
 </template>
 <script src="./glg-doit.litcoffee"></script>
 </polymer-element>

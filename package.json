@@ -2,8 +2,10 @@
   "name": "glg-doit",
   "version": "0.0.0",
   "dependencies": {
+    "glg-current-user": "git://github.com/custom-elements/glg-current-user#master",
     "lodash": "^2.4.1",
     "moment": "^2.8.3",
+    "node-uuid": "^1.4.2",
     "polymer": "git://github.com/custom-elements/polymer#master",
     "polymer-build": "git://github.com/custom-elements/polymer-tools#master",
     "ui-avatar": "git://github.com/custom-elements/ui-avatar#master",
@@ -13,10 +15,11 @@
     "ui-input": "git://github.com/custom-elements/ui-input#master",
     "ui-markdown": "git://github.com/custom-elements/ui-markdown#master",
     "ui-pages": "git://github.com/custom-elements/ui-pages#master",
+    "ui-preview": "git://github.com/custom-elements/ui-preview#master",
     "ui-styles": "git://github.com/custom-elements/ui-styles#master",
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
-    "ui-preview": "git://github.com/custom-elements/ui-preview#master",
-    "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master"
+    "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master",
+    "core-custom-event-client": "git://github.com/custom-elements/core-custom-event-client#master"
   },
   "license": "ISC",
   "scripts": {

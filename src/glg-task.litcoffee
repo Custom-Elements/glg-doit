@@ -2,14 +2,12 @@
 This is a single task UI.
 
     moment = require 'moment'
+    require '../node_modules/ui-styles/animations'
     Polymer 'glg-task',
 
 ##Events
-###complete
-Fired when the task is complete.
-
-###incomplete
-Fired if you move the task back to not complete.
+###task
+Fired when a task is in any way updated
 
 ##Attributes and Change Handlers
 ###task
@@ -18,12 +16,18 @@ Fired if you move the task back to not complete.
 Current search result of your coworkers.
 
 ##Methods
+###loginName
+Pick the login name out of an autocomplete person.
+
+      username: (person) ->
+        person?.username
+
 ###relativeDate
 Display filter for dates. Modern styling.
 
       relativeDate: (value) ->
         if value
-          moment(value).fromNow()
+          moment(value?.toUTCString?() or value).fromNow()
         else
           ""
 
@@ -50,21 +54,23 @@ search often, then present them for selection in the ui-typeahead via binding.
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
 
-      completeChange: ->
-        anim = @animate [
-          {height: @clientHeight, opacity: 1, transform: 'translateX(0)', offset: 0}
-          {height: @clientHeight, opacity: 0, transform: 'translateX(2%)', offset: 0.5}
-          {height: 0, opacity: 0, transform: 'translateX(2%)', offset: 1}
-        ], duration: 500, easing: "0.5s cubic-bezier(0.4, 0.0, 1, 1)"
-        anim.onfinish = =>
-          console.log 'complete change', @task, @task.complete
-          if @task.complete
-            @fire 'complete', @task
-          else
-            @fire 'incomplete', @task
+###completeChange
+Capture the change event on a check to allow for an animation, otherwise the
+checked task would just flash out of existence.
+
+      moveBetweenViews: (evt) ->
+        evt.stopPropagation()
+        console.log 'move', evt
+        return
+        @fadeOut =>
+          @fire 'task', @task
 
       startEditing: ->
         @$.what.focus()
+
+      taskUpdate: (evt, task) ->
+        evt.stopPropagation()
+        console.log 'update', evt
 
 ##Polymer Lifecycle
 

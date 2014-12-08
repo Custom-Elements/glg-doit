@@ -2,10 +2,9 @@
 <link rel="import" href="../node_modules/ui-check/src/ui-check.html">
 <link rel="import" href="../node_modules/ui-input/src/ui-input.html">
 <link rel="import" href="../node_modules/ui-form/src/ui-form.html">
-<link rel="import" href="../node_modules/ui-avatar/src/ui-avatar.html">
+<link rel="import" href="../node_modules/glg-current-user/src/glg-avatar.html">
 <link rel="import" href="../node_modules/ui-markdown/src/ui-markdown.html">
 <link rel="import" href="../node_modules/ui-preview/src/ui-preview.html">
-<link rel="import" href="../lib/core-ajax.html">
 <polymer-element name="glg-task" attributes="task coworkers">
 <template>
   <core-ajax
@@ -19,16 +18,16 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-preview on-expanded="{{startEditing}}">
+  <ui-preview on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
     <preview>
       <section horizontal spaced padded layout>
-        <ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check>
+        <ui-check value="{{task.complete}}" on-change="{{moveBetweenViews}}"></ui-check>
         <section vertical fill layout>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
           <small horizontal spaced center layout>
-            <template if="{{task.who}}">
-              <ui-avatar name="{{task.who.name}}"></ui-avatar>
+            <template if="{{task.delegated}}">
+              <glg-avatar username="{{task.delegated}}"></glg-avatar>
             </template>
             <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
           </small>
@@ -37,7 +36,7 @@
     </preview>
     <full>
       <section horizontal spaced padded layout>
-        <ui-check value="{{task.complete}}" on-change="{{completeChange}}"></ui-check>
+        <ui-check value="{{task.complete}}" on-change="{{moveBetweenViews}}"></ui-check>
         <section vertical spaced fill layout>
           <ui-input id="what" multiline="2" value="{{task.what}}">
             <preview>
@@ -49,14 +48,14 @@
             <preview>{{task.when | relativeDate}}</preview>
             <icon calendar></icon>
           </ui-input>
-          <ui-typeahead id="multiple" placeholder="Delegate To?" value="{{task.who}}" on-inputchange="{{searchCoworkers}}">
+          <ui-typeahead  placeholder="Delegate To?" value="{{task.delegated}}" valueFilter="{{username}}" on-inputchange="{{searchCoworkers}}" on-change="{{moveBetweenViews}}" >
             <icon user></icon>
             <template value>
-              <value><ui-avatar name="{{name}}"></ui-avatar></value>
+              <value><glg-avatar username="{{}}"></glg-avatar></value>
             </template>
             <template repeat="{{coworkers}}">
               <ui-typeahead-item>
-                <ui-avatar name="{{name}}"></ui-avatar>
+                <glg-avatar username="{{loginName}}"></glg-avatar>
                 <span>{{name}}</span>
               </ui-typeahead-item>
             </template>
