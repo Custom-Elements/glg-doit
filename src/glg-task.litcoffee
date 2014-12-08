@@ -3,6 +3,7 @@ This is a single task UI.
 
     moment = require 'moment'
     require '../node_modules/ui-styles/animations'
+    rules = require './rules.litcoffee'
     Polymer 'glg-task',
 
 ##Events
@@ -30,6 +31,18 @@ Display filter for dates. Modern styling.
           moment(value?.toUTCString?() or value).fromNow()
         else
           ""
+
+###delegatedOut
+Asking someone else to do this.
+
+      delegatedOut: (task) ->
+        rules.delegatedOut task, @username
+
+###delegatedToMe
+I've been asked to do thi.
+
+      delegatedToMe: (task) ->
+        rules.delegatedToMe task, @username
 
 ###due
 Style things with this filter.
@@ -61,7 +74,6 @@ checked task would just flash out of existence.
       moveBetweenViews: (evt) ->
         evt.stopPropagation()
         console.log 'move', evt
-        return
         @fadeOut =>
           @fire 'task', @task
 
@@ -71,6 +83,7 @@ checked task would just flash out of existence.
       taskUpdate: (evt, task) ->
         evt.stopPropagation()
         console.log 'update', evt
+        @fire 'task', @task
 
 ##Polymer Lifecycle
 

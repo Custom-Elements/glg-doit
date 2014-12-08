@@ -5,7 +5,7 @@
 <link rel="import" href="../node_modules/glg-current-user/src/glg-avatar.html">
 <link rel="import" href="../node_modules/ui-markdown/src/ui-markdown.html">
 <link rel="import" href="../node_modules/ui-preview/src/ui-preview.html">
-<polymer-element name="glg-task" attributes="task coworkers">
+<polymer-element name="glg-task" attributes="task coworkers username">
 <template>
   <core-ajax
     id="coworkers"
@@ -20,24 +20,27 @@
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
   <ui-preview on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
     <preview>
-      <section horizontal spaced padded layout>
-        <ui-check value="{{task.complete}}" on-change="{{moveBetweenViews}}"></ui-check>
-        <section vertical fill layout>
+      <row spaced padded>
+        <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        <column fill>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
-          <small horizontal spaced center layout>
-            <template if="{{task.delegated}}">
-              <glg-avatar username="{{task.delegated}}"></glg-avatar>
+          <row centered>
+            <template if="{{delegatedOut(task)}}">
+              To&nbsp;<glg-avatar username="{{task.delegated}}"></glg-avatar>&nbsp;
+            </template>
+            <template if="{{delegatedToMe(task)}}">
+              For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar>&nbsp;
             </template>
             <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
-          </small>
-        </section>
-      </section>
+          </row>
+        </column>
+      </row>
     </preview>
     <full>
-      <section horizontal spaced padded layout>
-        <ui-check value="{{task.complete}}" on-change="{{moveBetweenViews}}"></ui-check>
-        <section vertical spaced fill layout>
+      <row spaced padded>
+        <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        <column spaced fill>
           <ui-input id="what" multiline="2" value="{{task.what}}">
             <preview>
               <ui-markdown value="{{task.what}}">
@@ -48,10 +51,15 @@
             <preview>{{task.when | relativeDate}}</preview>
             <icon calendar></icon>
           </ui-input>
+          <template if="{{delegatedToMe(task)}}">
+            <row centered>For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar></row>
+          </template>
           <ui-typeahead  placeholder="Delegate To?" value="{{task.delegated}}" valueFilter="{{username}}" on-inputchange="{{searchCoworkers}}" on-change="{{moveBetweenViews}}" >
             <icon user></icon>
             <template value>
-              <value><glg-avatar username="{{}}"></glg-avatar></value>
+              <value>
+                <glg-avatar username="{{}}"></glg-avatar>
+              </value>
             </template>
             <template repeat="{{coworkers}}">
               <ui-typeahead-item>
@@ -60,8 +68,8 @@
               </ui-typeahead-item>
             </template>
           </ui-typeahead>
-        </section>
-      </section>
+        </column>
+      </row>
     </full>
   </ui-preview>
 </template>

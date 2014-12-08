@@ -23,9 +23,10 @@
     <glg-doit>
     </glg-doit>
     <script>
+      //this needs to be before polymer
+      window.debugUserName = 'glgroup\\wballard';
       document.addEventListener('polymer-ready', function() {
         //poke your element here
-        window.debugUserName = 'wballard';
         document.querySelector('glg-doit').testData();
       })
     </script>
