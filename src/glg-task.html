@@ -18,7 +18,7 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-preview on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
+  <ui-preview id="preview" on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
     <preview>
       <row spaced padded>
         <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
@@ -41,7 +41,7 @@
       <row spaced padded>
         <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
         <column spaced fill>
-          <ui-input id="what" multiline="2" value="{{task.what}}">
+          <ui-input placeholder="What?" id="what" multiline="2" value="{{task.what}}">
             <preview>
               <ui-markdown value="{{task.what}}">
               </ui-markdown>

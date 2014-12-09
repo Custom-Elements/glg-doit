@@ -14,6 +14,13 @@ This is the name of the view currently selected.
 
 
 ##Methods
+###addTodo
+
+      addTodo: ->
+        @data.todo.unshift
+          who: @username
+          autofocus: true
+
 ###testData
 Fill me with piles of tasks simulating the event flow
 from the server that does not exist yet.

@@ -13,6 +13,12 @@ Fired when a task is in any way updated
 ##Attributes and Change Handlers
 ###task
 
+      taskChanged: ->
+        if @task.autofocus
+          delete @task.autofocus
+          @async =>
+            @startEditing()
+
 ###coworkers
 Current search result of your coworkers.
 
@@ -78,7 +84,8 @@ checked task would just flash out of existence.
           @fire 'task', @task
 
       startEditing: ->
-        @$.what.focus()
+        @$.preview.expand =>
+          @$.what.focus()
 
       taskUpdate: (evt, task) ->
         evt.stopPropagation()

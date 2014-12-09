@@ -3,6 +3,7 @@
 <link rel="import" href="../node_modules/ui-tab/src/ui-tab.html">
 <link rel="import" href="../node_modules/ui-preview/src/ui-only-one-expanded.html">
 <link rel="import" href="../node_modules/glg-current-user/src/glg-current-user.html">
+<link rel="import" href="../node_modules/ui-button/src/ui-button.html">
 <link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data username">
@@ -11,9 +12,17 @@
   <glg-current-user username="{{username}}"></glg-current-user>
   <core-custom-event-client id="bus"></core-custom-event-client>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
-    <ui-input id="search" placeholder="Search tasks" borderless>
-      <icon search></icon>
-    </ui-input>
+    <row>
+      <ui-input id="search" placeholder="Search tasks" borderless>
+        <icon search></icon>
+      </ui-input>
+      <ui-button minimal on-click="{{addTodo}}">
+        <ui-tooltip>
+          <span tip>Add a Todo</span>
+          <icon plus-square></icon>
+        </ui-tooltip>
+      </ui-button>
+    </row>
     <ui-tabs id="tasknavigation" value="{{taskview}}">
       <ui-tab value="your">
         <div>Your Tasks</div>
