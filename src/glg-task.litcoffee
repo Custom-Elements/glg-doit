@@ -26,7 +26,7 @@ Current search result of your coworkers.
 ###loginName
 Pick the login name out of an autocomplete person.
 
-      username: (person) ->
+      pluckUsername: (person) ->
         person?.username
 
 ###relativeDate

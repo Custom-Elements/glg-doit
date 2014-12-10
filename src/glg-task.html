@@ -21,7 +21,7 @@
   <ui-preview id="preview" on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
     <preview>
       <row spaced padded>
-        <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        <ui-check value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
         <column fill>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
@@ -54,7 +54,7 @@
           <template if="{{delegatedToMe(task)}}">
             <row centered>For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar></row>
           </template>
-          <ui-typeahead  placeholder="Delegate To?" value="{{task.delegated}}" valueFilter="{{username}}" on-inputchange="{{searchCoworkers}}" on-change="{{moveBetweenViews}}" >
+          <ui-typeahead  placeholder="Delegate To?" value="{{task.delegated}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}" on-change="{{moveBetweenViews}}" >
             <icon user></icon>
             <template value>
               <value>
