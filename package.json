@@ -20,6 +20,7 @@
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master",
     "ui-button": "git://github.com/custom-elements/ui-button#master",
+    "ui-attention": "git://github.com/custom-elements/ui-attention#master",
     "core-custom-event-client": "git://github.com/custom-elements/core-custom-event-client#master"
   },
   "license": "ISC",

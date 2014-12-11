@@ -4,6 +4,7 @@
 <link rel="import" href="../node_modules/ui-preview/src/ui-only-one-expanded.html">
 <link rel="import" href="../node_modules/glg-current-user/src/glg-current-user.html">
 <link rel="import" href="../node_modules/ui-button/src/ui-button.html">
+<link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data username">
@@ -26,15 +27,15 @@
     <ui-tabs id="tasknavigation" value="{{taskview}}">
       <ui-tab value="your">
         <div>Your Tasks</div>
-        <div number>{{data.todo.length | todoNumber}}</div>
+        <ui-attention number>{{data.todo.length | todoNumber}}</ui-attention>
       </ui-tab>
       <ui-tab value="delegated">
         <div>Delegated</div>
-        <div number>{{data.delegated.length | todoNumber}}</div>
+        <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
       </ui-tab>
       <ui-tab value="complete">
         <div>Complete</div>
-        <div number>{{data.done.length | todoNumber}}</div>
+        <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
       </ui-tab>
     </ui-tabs>
     <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
