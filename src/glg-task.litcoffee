@@ -8,7 +8,10 @@ This is a single task UI.
 
 ##Events
 ###task
-Fired when a task is in any way updated
+Fired when a task is in any way updated.
+
+###task-delete
+Fired when a task needs a trip to the shredder.
 
 ##Attributes and Change Handlers
 ###task
@@ -72,6 +75,10 @@ search often, then present them for selection in the ui-typeahead via binding.
 
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
+
+      deleteTodo: ->
+        @fadeOut =>
+          @fire 'task-delete', @task
 
 ###completeChange
 Capture the change event on a check to allow for an animation, otherwise the

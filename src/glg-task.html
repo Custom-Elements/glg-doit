@@ -21,7 +21,9 @@
   <ui-preview id="preview" on-expanded="{{startEditing}}" on-change="{{taskUpdate}}">
     <preview>
       <row spaced padded>
-        <ui-check value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        <column>
+          <ui-check value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        </column>
         <column fill>
           <ui-markdown value="{{task.what}}">
           </ui-markdown>
@@ -39,7 +41,15 @@
     </preview>
     <full>
       <row spaced padded>
-        <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+        <column>
+          <ui-check padded value="{{task.done}}" on-change="{{moveBetweenViews}}"></ui-check>
+          <ui-button minimal on-click="{{deleteTodo}}">
+            <ui-tooltip>
+              <span tip>Trash This Task</span>
+              <icon trash></icon>
+            </ui-tooltip>
+          </ui-button>
+        </column>
         <column spaced fill>
           <ui-input placeholder="What?" id="what" multiline="2" value="{{task.what}}">
             <preview>
@@ -49,13 +59,11 @@
           </ui-input>
           <ui-input placeholder="When?" type="date" value="{{task.when}}" class="{{due(task.when)}}">
             <preview>{{task.when | relativeDate}}</preview>
-            <icon calendar></icon>
           </ui-input>
           <template if="{{delegatedToMe(task)}}">
             <row centered>For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar></row>
           </template>
           <ui-typeahead  placeholder="Delegate To?" value="{{task.delegated}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}" on-change="{{moveBetweenViews}}" >
-            <icon user></icon>
             <template value>
               <value>
                 <glg-avatar username="{{}}"></glg-avatar>

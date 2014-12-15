@@ -9,7 +9,7 @@
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data username">
 <template>
-  <event-trap vertical layout on-task="{{processTask}}">
+  <event-trap vertical layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
   <glg-current-user username="{{username}}"></glg-current-user>
   <core-custom-event-client id="bus"></core-custom-event-client>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">

@@ -106,6 +106,14 @@ Any other task isn't your problem!
           _.remove @data.delegated, (x) -> x.id is task.id
           _.remove @data.done, (x) -> x.id is task.id
 
+###processTaskDelete
+This one is a bit simpler than a normal update, just pull it from the lists.
+
+      processTaskDelete: (evt, task) ->
+        _.remove @data.delegated, (x) -> x.id is task.id
+        _.remove @data.todo, (x) -> x.id is task.id
+        _.remove @data.done, (x) -> x.id is task.id
+
 ##Polymer Lifecycle
 
       created: ->
