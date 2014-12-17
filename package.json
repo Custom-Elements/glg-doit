@@ -21,7 +21,8 @@
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master",
     "ui-button": "git://github.com/custom-elements/ui-button#master",
     "ui-attention": "git://github.com/custom-elements/ui-attention#master",
-    "core-custom-event-client": "git://github.com/custom-elements/core-custom-event-client#master"
+    "core-custom-event-client": "git://github.com/custom-elements/core-custom-event-client#master",
+    "epiquery2": "git://github.com/wballard/epiquery2.git"
   },
   "license": "ISC",
   "scripts": {

@@ -2,7 +2,9 @@
 This is a single task UI.
 
     moment = require 'moment'
+    _ = require 'lodash'
     require '../node_modules/ui-styles/animations'
+
     rules = require './rules.litcoffee'
     Polymer 'glg-task',
 
@@ -71,10 +73,26 @@ search often, then present them for selection in the ui-typeahead via binding.
               name: query.value
         @$.coworkers.go()
 
+###save
+Save a task and make sure things go well!
+
+      save: ->
+        console.log 'saving', @task
+        rules.validate @task, @username
+        @$.addTask.params = @task
+        #@$.addTask.go()
+        @fire 'task', @task
+
 ##Event Handlers
 
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
+
+      addTaskResponse: (evt, detail) ->
+        console.log 'task back from server', arguments
+
+      addTaskError: (evt, detail) ->
+        console.log 'error back from server', arguments
 
       deleteTodo: ->
         @fadeOut =>
@@ -86,9 +104,8 @@ checked task would just flash out of existence.
 
       moveBetweenViews: (evt) ->
         evt.stopPropagation()
-        console.log 'move', evt
         @fadeOut =>
-          @fire 'task', @task
+          @save()
 
       startEditing: ->
         @$.preview.expand =>
@@ -96,8 +113,7 @@ checked task would just flash out of existence.
 
       taskUpdate: (evt, task) ->
         evt.stopPropagation()
-        console.log 'update', evt
-        @fire 'task', @task
+        @save()
 
 ##Polymer Lifecycle
 
@@ -105,7 +121,10 @@ checked task would just flash out of existence.
 
       ready: ->
 
+Debounce the save, otherwise it gets a little fiesty as you type.
+
       attached: ->
+        @save = _.debounce @save.bind(@), 1000
 
       domReady: ->
 
