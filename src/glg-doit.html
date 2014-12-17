@@ -6,6 +6,7 @@
 <link rel="import" href="../node_modules/ui-button/src/ui-button.html">
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
+<link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="taskview data username">
 <template>
@@ -41,9 +42,11 @@
     <ui-pages id="taskview" value="{{taskview}}" on-complete="{{taskComplete}}" on-incomplete="{{taskIncomplete}}">
       <ui-page value="your">
         <ui-only-one-expanded>
-          <template repeat="{{task in data.todo}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
-          </template>
+          <core-list id="list" data="{{data.todo}}">
+            <template>
+              <glg-task task="{{model}}" username="{{username}}"></glg-task>
+            </template>
+          </core-list>
         </ui-only-one-expanded>
       </ui-page>
       <ui-page value="delegated">
