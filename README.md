@@ -29,3 +29,15 @@ show up in their list while you are away.
 DoIt realizes you are busy, so tasks in your list can be delegate to any
 colleague, which show up in their list -- and in yours under [Delegated] so you
 can keep track if needed.
+
+#Setup
+Install the node modules
+`npm install`
+
+Install the bower components
+`bower update`
+
+Start Server
+`npm test`
+
+Visit http://localhost:10000/demo.html
