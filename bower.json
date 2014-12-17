@@ -1,0 +1,16 @@
+{
+  "name": "glg-doit",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Custom-Elements/glg-doit",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core-list": "Polymer/core-list#~0.5.2"
+  }
+}
