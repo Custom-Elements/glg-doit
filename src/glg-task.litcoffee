@@ -73,16 +73,6 @@ search often, then present them for selection in the ui-typeahead via binding.
               name: query.value
         @$.coworkers.go()
 
-###save
-Save a task and make sure things go well!
-
-      save: ->
-        console.log 'saving', @task
-        rules.validate @task, @username
-        @$.addTask.params = @task
-        #@$.addTask.go()
-        @fire 'task', @task
-
 ##Event Handlers
 
       coworkersResponse: (evt, detail)->
@@ -105,15 +95,16 @@ checked task would just flash out of existence.
       moveBetweenViews: (evt) ->
         evt.stopPropagation()
         @fadeOut =>
-          @save()
+          @fire 'edit', @task
 
       startEditing: ->
         @$.preview.expand =>
           @$.what.focus()
 
-      taskUpdate: (evt, task) ->
+      editTask: (evt) ->
         evt.stopPropagation()
-        @save()
+        @fire 'edit', @task
+
 
 ##Polymer Lifecycle
 
@@ -121,10 +112,7 @@ checked task would just flash out of existence.
 
       ready: ->
 
-Debounce the save, otherwise it gets a little fiesty as you type.
-
       attached: ->
-        @save = _.debounce @save.bind(@), 1000
 
       domReady: ->
 

@@ -129,6 +129,13 @@ This one is a bit simpler than a normal update, just pull it from the lists.
         _.remove @data.todo, (x) -> x.guid is task.guid
         _.remove @data.done, (x) -> x.guid is task.guid
 
+###processTaskSave
+To the database with you!
+
+      processTaskSave: (evt, task) ->
+        console.log 'save', task
+        @epiclient.query 'glglive_o', 'todo/addTask.mustache', task
+
 ##Polymer Lifecycle
 
       created: ->
