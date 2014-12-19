@@ -23,7 +23,7 @@
       <ui-form>
         <row spaced padded>
           <column>
-            <ui-check value="{{task.done}}" on-edit="{{moveBetweenViews}}"></ui-check>
+            <ui-check value="{{task.done}}"></ui-check>
           </column>
           <column fill>
             <ui-markdown value="{{task.what}}">
@@ -45,7 +45,7 @@
       <ui-form>
         <row spaced padded>
           <column>
-            <ui-check padded value="{{task.done}}" on-edit="{{moveBetweenViews}}"></ui-check>
+            <ui-check padded value="{{task.done}}"></ui-check>
             <ui-button minimal on-click="{{deleteTodo}}">
               <ui-tooltip>
                 <span tip>Trash This Task</span>
@@ -66,7 +66,7 @@
             <template if="{{delegatedToMe(task)}}">
               <row centered>For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar></row>
             </template>
-            <ui-typeahead  placeholder="Delegate To?" value="{{task.delegate}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}" on-edit="{{moveBetweenViews}}" >
+            <ui-typeahead  placeholder="Delegate To?" value="{{task.delegate}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}">
               <template value>
                 <value>
                   <glg-avatar username="{{}}"></glg-avatar>

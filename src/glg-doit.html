@@ -42,22 +42,24 @@
     <ui-pages id="taskview" value="{{taskview}}" on-edit="{{processTaskSave}}">
       <ui-page value="your">
         <ui-only-one-expanded>
-          <core-list id="list" data="{{data.todo}}">
-            <template>
-              <glg-task task="{{model}}" username="{{username}}"></glg-task>
-            </template>
-          </core-list>
+          <template repeat="{{task in data.todo}}">
+            <glg-task task="{{task}}" username="{{username}}"></glg-task>
+          </template>
         </ui-only-one-expanded>
       </ui-page>
       <ui-page value="delegated">
-        <template repeat="{{task in data.delegated}}">
-          <glg-task task="{{task}}" username="{{username}}"></glg-task>
-        </template>
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.delegated}}">
+            <glg-task task="{{task}}" username="{{username}}"></glg-task>
+          </template>
+        </ui-only-one-expanded>
       </ui-page>
       <ui-page value="complete">
-        <template repeat="{{task in data.done}}">
-          <glg-task task="{{task}}" username="{{username}}"></glg-task>
-        </template>
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.done}}">
+            <glg-task task="{{task}}" username="{{username}}"></glg-task>
+          </template>
+        </ui-only-one-expanded>
       </ui-page>
     </ui-pages>
   </event-trap>

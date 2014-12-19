@@ -92,11 +92,6 @@ search often, then present them for selection in the ui-typeahead via binding.
 Capture the change event on a check to allow for an animation, otherwise the
 checked task would just flash out of existence.
 
-      moveBetweenViews: (evt) ->
-        evt.stopPropagation()
-        @fadeOut =>
-          @fire 'edit', @task
-
       startEditing: ->
         @$.preview.expand =>
           @$.what.focus()
@@ -104,7 +99,6 @@ checked task would just flash out of existence.
       editTask: (evt) ->
         evt.stopPropagation()
         @fire 'edit', @task
-
 
 ##Polymer Lifecycle
 
