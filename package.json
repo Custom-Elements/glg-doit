@@ -10,7 +10,7 @@
     "moment": "^2.8.3",
     "node-uuid": "^1.4.2",
     "polymer": "git://github.com/custom-elements/polymer#master",
-    "polymer-build": "git://github.com/custom-elements/polymer-tools#master",
+    "polymer-serve": "git://github.com/custom-elements/polymer-serve#master",
     "ui-attention": "git://github.com/custom-elements/ui-attention#master",
     "ui-avatar": "git://github.com/custom-elements/ui-avatar#master",
     "ui-button": "git://github.com/custom-elements/ui-button#master",
@@ -27,7 +27,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "test": "polymer-build watch . src/ build/",
+    "test": "polymer-serve .",
     "postinstall": "bower install"
   }
 }
