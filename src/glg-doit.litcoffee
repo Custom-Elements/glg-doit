@@ -124,10 +124,12 @@ Any other task isn't your problem!
 This one is a bit simpler than a normal update, just pull it from the lists.
 
       processTaskDelete: (evt, task) ->
+        console.log 'delete', task
         delete @data.all[task.guid]
         _.remove @data.delegated, (x) -> x.guid is task.guid
         _.remove @data.todo, (x) -> x.guid is task.guid
         _.remove @data.done, (x) -> x.guid is task.guid
+        @epiclient.query 'glglive_o', 'todo/deleteTask.mustache', task
 
 ###processTaskSave
 To the database with you!
