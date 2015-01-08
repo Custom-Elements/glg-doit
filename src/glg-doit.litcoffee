@@ -27,41 +27,6 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
           who: @username
           autofocus: true
 
-###testData
-Fill me with piles of tasks simulating the event flow
-from the server that does not exist yet.
-
-      testData: ->
-        @$.bus.fire 'task',
-          who: @username
-          what: "Finish me\n* Shiny\n* Happy\n"
-          when: "11/25/14"
-        @$.bus.fire 'task',
-          who: @username
-          what: "Start me"
-          when: "11/25/17"
-        @$.bus.fire 'task',
-          who: @username
-          delegated: "glgroup\\lsylvetsky"
-          what: "Use some sockets\nto make some TPV"
-          when: "12/21/14"
-        @$.bus.fire 'task',
-          who: @username
-          delegated: "glgroup\\rloebl"
-          what: "Make some slides"
-          when: "12/21/14"
-        @$.bus.fire 'task',
-          who: "glgroup\\rloebl"
-          delegated: @username
-          what: "You make some slides"
-          when: "12/21/14"
-        @$.bus.fire 'task',
-          who: @username
-          delegated: "glgroup\\rloebl"
-          what: "All the things!"
-          when: "12/3/14"
-          done: true
-
 ###todoNumber
 All about formatting the number of todos, which really means defaulting.
 

@@ -16,6 +16,15 @@ Make sure the task data can be saved or displayed.
           task.when = moment(task.when).utc().format("YYYY-MM-DD")
         else
           task.when = null
+
+The done is just a check box, so make sure it is a date.
+
+        if task.done
+          if moment(task.done).isValid()
+            task.done = moment(task.done).utc().format("YYYY-MM-DD")
+          else
+           task.done = moment().utc().format("YYYY-MM-DD")
+
         task.delegate = task.delegate or ''
 
 ###delegatedOut
