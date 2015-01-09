@@ -18,6 +18,15 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
       usernameChanged: ->
         @epiclient.query 'glglive_o', 'todo/list.mustache',
           username: @username
+        @epiclient.query 'glglive_o', 'todo/doneList.mustache',
+          username: @username
+        clearInterval @updatePoll
+        @updatePoll = setInterval =>
+          if @next_baseline
+            @epiclient.query 'glglive_o', 'todo/listChanges.mustache',
+              username: @username
+              next_baseline: @next_baseline
+        , 1000
 
 ##Methods
 ###addTodo
@@ -32,6 +41,7 @@ All about formatting the number of todos, which really means defaulting.
 
       todoNumber: (value) ->
         value or 0
+
 
 ##Event Handlers
 ###processTask
@@ -53,9 +63,9 @@ Any done task is just that.
 
 Any other task isn't your problem!
 
-
       processTask: (evt, task) ->
         console.log task
+        @next_baseline = task.next_baseline or @next_baseline
         rules.validate task, @username
         @data = @data or {}
         @data.todo = @data.todo or []
@@ -63,7 +73,8 @@ Any other task isn't your problem!
         @data.done = @data.done or []
         @data.all = @data.all or {}
 
-        task = _.extend @data.all[task.id] or {}, task
+        task = _.extend @data.all[task.guid] or {}, task
+        @data.all[task.guid] = task
 
         if task.done
           _.remove @data.delegated, (x) -> x.guid is task.guid

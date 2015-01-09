@@ -88,6 +88,13 @@ search often, then present them for selection in the ui-typeahead via binding.
         @fadeOut =>
           @fire 'task-delete', @task
 
+      saveTodo: ->
+        @$.preview.collapse =>
+          @fire 'task-save', @task
+
+      cancelTodo: ->
+        @$.preview.collapse()
+
 ###completeChange
 Capture the change event on a check to allow for an animation, otherwise the
 checked task would just flash out of existence.
@@ -95,10 +102,6 @@ checked task would just flash out of existence.
       startEditing: ->
         @$.preview.expand =>
           @$.what.focus()
-
-      editTask: (evt) ->
-        evt.stopPropagation()
-        @fire 'edit', @task
 
 ##Polymer Lifecycle
 

@@ -39,7 +39,7 @@
         <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
       </ui-tab>
     </ui-tabs>
-    <ui-pages id="taskview" value="{{taskview}}" on-edit="{{processTaskSave}}">
+    <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
       <ui-page value="your">
         <ui-only-one-expanded>
           <template repeat="{{task in data.todo}}">

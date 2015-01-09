@@ -5,6 +5,7 @@
 <link rel="import" href="../node_modules/glg-current-user/src/glg-avatar.html">
 <link rel="import" href="../node_modules/ui-markdown/src/ui-markdown.html">
 <link rel="import" href="../node_modules/ui-preview/src/ui-preview.html">
+<link rel="import" href="../node_modules/ui-button/src/ui-button.html">
 <polymer-element name="glg-task" attributes="task coworkers username">
 <template>
   <core-ajax
@@ -18,7 +19,7 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-preview id="preview" on-expanded="{{startEditing}}" on-edit="{{editTask}}">
+  <ui-preview id="preview" on-expanded="{{startEditing}}">
     <preview>
       <ui-form>
         <row spaced padded>
@@ -46,12 +47,6 @@
         <row spaced padded>
           <column>
             <ui-check padded value="{{task.done}}"></ui-check>
-            <ui-button minimal on-click="{{deleteTodo}}">
-              <ui-tooltip>
-                <span tip>Trash This Task</span>
-                <icon trash></icon>
-              </ui-tooltip>
-            </ui-button>
           </column>
           <column spaced fill>
             <ui-input placeholder="What?" id="what" multiline="2" value="{{task.what}}">
@@ -79,6 +74,16 @@
                 </ui-typeahead-item>
               </template>
             </ui-typeahead>
+            <row spaced end>
+              <ui-button on-click="{{deleteTodo}}">
+                <ui-tooltip>
+                  <span tip>Trash This Task</span>
+                  <icon trash></icon>
+                </ui-tooltip>
+              </ui-button>
+              <ui-button on-click="{{cancelTodo}}">Cancel</ui-button>
+              <ui-button on-click="{{saveTodo}}">Save</ui-button>
+            </row>
           </column>
         </row>
       </ui-form>
