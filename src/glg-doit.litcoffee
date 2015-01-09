@@ -26,7 +26,7 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
             @epiclient.query 'glglive_o', 'todo/listChanges.mustache',
               username: @username
               next_baseline: @next_baseline
-        , 1000
+        , 30000
 
 ##Methods
 ###addTodo

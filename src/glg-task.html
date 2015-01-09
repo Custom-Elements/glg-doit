@@ -24,7 +24,7 @@
       <ui-form>
         <row spaced padded>
           <column>
-            <ui-check value="{{task.done}}"></ui-check>
+            <ui-check value="{{task.done}}" on-click="{{doneTodo}}"></ui-check>
           </column>
           <column fill>
             <ui-markdown value="{{task.what}}">
