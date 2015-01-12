@@ -15,7 +15,7 @@
   <core-custom-event-client id="bus"></core-custom-event-client>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
     <row>
-      <ui-input id="search" placeholder="Search tasks" borderless>
+      <ui-input id="search" placeholder="Search tasks" borderless on-change="{{search}}">
         <icon search></icon>
       </ui-input>
       <ui-button minimal on-click="{{addTodo}}">
@@ -24,6 +24,13 @@
           <icon plus-square></icon>
         </ui-tooltip>
       </ui-button>
+    </row>
+    <row>
+      <ui-only-one-expanded>
+        <template repeat="{{task in data.search}}">
+          <glg-task task="{{task}}" username="{{username}}"></glg-task>
+        </template>
+      </ui-only-one-expanded>
     </row>
     <ui-tabs id="tasknavigation" value="{{taskview}}">
       <ui-tab value="your">

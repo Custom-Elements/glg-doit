@@ -4,6 +4,7 @@ An embeddable task list.
     _ = require 'lodash'
     rules = require './rules.litcoffee'
     epiquery2 = require 'epiquery2'
+    hummingbird = require 'hummingbird'
     Polymer 'glg-doit',
 
 ##Events
@@ -115,6 +116,25 @@ To the database with you!
         console.log 'save', task
         @epiclient.query 'glglive_o', 'todo/addTask.mustache', task
         @processTask undefined, task
+
+###search
+Process a search, this will:
+* make sure there is a current index, leveraging the `@next_revision` from SQL
+* search the index for an array of tasks
+* swap the UI out with a data bound list or search results
+
+      search: (evt) ->
+        if (@index?.at_revision or 0) isnt @next_revision
+          @index = new hummingbird.Index()
+          @index.at_revision = @next_revision or 0
+          Object.keys(@data.all).forEach (guid) =>
+            task = @data.all[guid]
+            @index.add
+              id: guid
+              name: "#{task.what} #{task.who}"
+              task: task
+        @index.search @$.search.value, (results) =>
+          @data.search = results.map (x) -> x.task
 
 ##Polymer Lifecycle
 
