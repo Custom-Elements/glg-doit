@@ -133,8 +133,12 @@ Process a search, this will:
               id: guid
               name: "#{task.what} #{task.who}"
               task: task
-        @index.search @$.search.value, (results) =>
-          @data.search = results.map (x) -> x.task
+        if @$.search.value?.trim()
+          @index.search @$.search.value, (results) =>
+            @data.search = results.map (x) -> x.task
+            @mainview = "search"
+        else
+          @mainview = "tabs"
 
 ##Polymer Lifecycle
 
@@ -146,6 +150,7 @@ Hooking up to epistream. Each row coming back gets processed the same from
 the server as from the client.
 
       attached: ->
+        @mainview = 'tabs'
         @taskview = 'your'
         @epiclient = new epiquery2.EpiClient([
           "wss://services.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"

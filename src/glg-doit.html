@@ -8,7 +8,7 @@
 <link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
-<polymer-element name="glg-doit" attributes="taskview data username">
+<polymer-element name="glg-doit" attributes="mainview taskview data username">
 <template>
   <event-trap vertical layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
   <glg-current-user username="{{username}}"></glg-current-user>
@@ -25,48 +25,55 @@
         </ui-tooltip>
       </ui-button>
     </row>
-    <row>
-      <ui-only-one-expanded>
-        <template repeat="{{task in data.search}}">
-          <glg-task task="{{task}}" username="{{username}}"></glg-task>
+    <ui-pages id="mainview" value="{{mainview}}">
+      <ui-page value="search">
+        <template if="{{!data.search.length}}">
+          I didn't manage to find anything for you. <icon frown-o></icon>
         </template>
-      </ui-only-one-expanded>
-    </row>
-    <ui-tabs id="tasknavigation" value="{{taskview}}">
-      <ui-tab value="your">
-        <div>Your Tasks</div>
-        <ui-attention number>{{data.todo.length | todoNumber}}</ui-attention>
-      </ui-tab>
-      <ui-tab value="delegated">
-        <div>Delegated</div>
-        <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
-      </ui-tab>
-      <ui-tab value="complete">
-        <div>Complete</div>
-        <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
-      </ui-tab>
-    </ui-tabs>
-    <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
-      <ui-page value="your">
         <ui-only-one-expanded>
-          <template repeat="{{task in data.todo}}">
+          <template repeat="{{task in data.search}}">
             <glg-task task="{{task}}" username="{{username}}"></glg-task>
           </template>
         </ui-only-one-expanded>
       </ui-page>
-      <ui-page value="delegated">
-        <ui-only-one-expanded>
-          <template repeat="{{task in data.delegated}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
-          </template>
-        </ui-only-one-expanded>
-      </ui-page>
-      <ui-page value="complete">
-        <ui-only-one-expanded>
-          <template repeat="{{task in data.done}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
-          </template>
-        </ui-only-one-expanded>
+      <ui-page value="tabs">
+        <ui-tabs id="tasknavigation" value="{{taskview}}">
+          <ui-tab value="your">
+            <div>Your Tasks</div>
+            <ui-attention number>{{data.todo.length | todoNumber}}</ui-attention>
+          </ui-tab>
+          <ui-tab value="delegated">
+            <div>Delegated</div>
+            <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
+          </ui-tab>
+          <ui-tab value="complete">
+            <div>Complete</div>
+            <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
+          </ui-tab>
+        </ui-tabs>
+        <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
+          <ui-page value="your">
+            <ui-only-one-expanded>
+              <template repeat="{{task in data.todo}}">
+                <glg-task task="{{task}}" username="{{username}}"></glg-task>
+              </template>
+            </ui-only-one-expanded>
+          </ui-page>
+          <ui-page value="delegated">
+            <ui-only-one-expanded>
+              <template repeat="{{task in data.delegated}}">
+                <glg-task task="{{task}}" username="{{username}}"></glg-task>
+              </template>
+            </ui-only-one-expanded>
+          </ui-page>
+          <ui-page value="complete">
+            <ui-only-one-expanded>
+              <template repeat="{{task in data.done}}">
+                <glg-task task="{{task}}" username="{{username}}"></glg-task>
+              </template>
+            </ui-only-one-expanded>
+          </ui-page>
+        </ui-pages>
       </ui-page>
     </ui-pages>
   </event-trap>
