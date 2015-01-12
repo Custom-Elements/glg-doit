@@ -25,7 +25,7 @@
         </ui-tooltip>
       </ui-button>
     </row>
-    <ui-pages id="mainview" value="{{mainview}}">
+    <ui-pages id="mainview" value="{{mainview}}" on-task-save="{{processTaskSave}}">
       <ui-page value="search">
         <template if="{{!data.search.length}}">
           I didn't manage to find anything for you. <icon frown-o></icon>
@@ -51,7 +51,7 @@
             <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
           </ui-tab>
         </ui-tabs>
-        <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
+        <ui-pages id="taskview" value="{{taskview}}">
           <ui-page id="your" value="your">
             <ui-only-one-expanded>
               <template repeat="{{task in data.your}}">
