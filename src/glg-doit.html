@@ -52,9 +52,9 @@
           </ui-tab>
         </ui-tabs>
         <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
-          <ui-page value="your">
+          <ui-page id="your" value="your">
             <ui-only-one-expanded>
-              <template repeat="{{task in data.todo}}">
+              <template repeat="{{task in data.your}}">
                 <glg-task task="{{task}}" username="{{username}}"></glg-task>
               </template>
             </ui-only-one-expanded>

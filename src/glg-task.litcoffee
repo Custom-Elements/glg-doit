@@ -18,12 +18,6 @@ Fired when a task needs a trip to the shredder.
 ##Attributes and Change Handlers
 ###task
 
-      taskChanged: ->
-        if @task.autofocus
-          delete @task.autofocus
-          @async =>
-            @startEditing()
-
 ###coworkers
 Current search result of your coworkers.
 
@@ -103,7 +97,10 @@ search often, then present them for selection in the ui-typeahead via binding.
 Capture the change event on a check to allow for an animation, otherwise the
 checked task would just flash out of existence.
 
-      startEditing: ->
+##focus
+Get down to the business of editing.
+
+      focus: ->
         @$.preview.expand =>
           @$.what.focus()
 

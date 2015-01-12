@@ -31,11 +31,21 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
 
 ##Methods
 ###addTodo
+Adding a todo will check for a 'your' task that is blank to avoid a long
+string of blank tasks. Otherwise -- it just pushes a new task on the list.
 
       addTodo: ->
-        @data.todo.unshift
-          who: @username
-          autofocus: true
+        focusOnBlankElement = =>
+          taskElements = @shadowRoot.querySelectorAll('#your glg-task').array()
+          for taskElement in taskElements
+            if not taskElement.templateInstance.model.task.what
+              taskElement.focus()
+              return true
+          false
+        if not focusOnBlankElement()
+          @data.your.unshift
+            who: @username
+          @async focusOnBlankElement
 
 ###todoNumber
 All about formatting the number of todos, which really means defaulting.
@@ -65,11 +75,10 @@ Any done task is just that.
 Any other task isn't your problem!
 
       processTask: (evt, task) ->
-        console.log task
         @next_baseline = task.next_baseline or @next_baseline
         rules.validate task, @username
         @data = @data or {}
-        @data.todo = @data.todo or []
+        @data.your = @data.your or []
         @data.delegated = @data.delegated or []
         @data.done = @data.done or []
         @data.all = @data.all or {}
@@ -79,21 +88,21 @@ Any other task isn't your problem!
 
         if task.done
           _.remove @data.delegated, (x) -> x.guid is task.guid
-          _.remove @data.todo, (x) -> x.guid is task.guid
+          _.remove @data.your, (x) -> x.guid is task.guid
           if not _.any(@data.done, (x) -> x.guid is task.guid)
             @data.done.push task
         else if rules.delegatedOut task, @username
-          _.remove @data.todo, (x) -> x.guid is task.guid
+          _.remove @data.your, (x) -> x.guid is task.guid
           _.remove @data.done, (x) -> x.guid is task.guid
           if not _.any(@data.delegated, (x) -> x.guid is task.guid)
             @data.delegated.push task
         else if rules.forMe task, @username
           _.remove @data.delegated, (x) -> x.guid is task.guid
           _.remove @data.done, (x) -> x.guid is task.guid
-          if not _.any(@data.todo, (x) -> x.guid is task.guid)
-            @data.todo.push task
+          if not _.any(@data.your, (x) -> x.guid is task.guid)
+            @data.your.push task
         else
-          _.remove @data.todo, (x) -> x.guid is task.guid
+          _.remove @data.your, (x) -> x.guid is task.guid
           _.remove @data.delegated, (x) -> x.guid is task.guid
           _.remove @data.done, (x) -> x.guid is task.guid
 
@@ -104,7 +113,7 @@ This one is a bit simpler than a normal update, just pull it from the lists.
         console.log 'delete', task
         delete @data.all[task.guid]
         _.remove @data.delegated, (x) -> x.guid is task.guid
-        _.remove @data.todo, (x) -> x.guid is task.guid
+        _.remove @data.your, (x) -> x.guid is task.guid
         _.remove @data.done, (x) -> x.guid is task.guid
         @epiclient.query 'glglive_o', 'todo/deleteTask.mustache', task
 
