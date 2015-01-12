@@ -53,7 +53,6 @@ All about formatting the number of todos, which really means defaulting.
       todoNumber: (value) ->
         value or 0
 
-
 ##Event Handlers
 ###processTask
 Process any update to a task. No distinction is made from a local task change

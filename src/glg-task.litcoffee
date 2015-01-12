@@ -90,9 +90,6 @@ search often, then present them for selection in the ui-typeahead via binding.
         evt.stopPropagation()
         @fire 'task-save', @task
 
-      cancelTodo: ->
-        @$.preview.collapse()
-
 ###completeChange
 Capture the change event on a check to allow for an animation, otherwise the
 checked task would just flash out of existence.
