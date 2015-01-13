@@ -10,6 +10,12 @@ An embeddable task list.
 ##Events
 
 ##Attributes and Change Handlers
+###searchstring
+What we are looking for now. This is data bound driven.
+
+      searchstringChanged: ->
+        @search()
+
 ###taskview
 This is the name of the view currently selected.
 
@@ -145,9 +151,9 @@ Process a search, this will:
         if @$.search.value?.trim()
           @index.search @$.search.value, (results) =>
             @data.search = results.map (x) -> x.task
-            @mainview = "search"
+            @mainview = 'search'
         else
-          @mainview = "tabs"
+          @mainview = 'tasks'
 
 ##Polymer Lifecycle
 
@@ -159,7 +165,7 @@ Hooking up to epistream. Each row coming back gets processed the same from
 the server as from the client.
 
       attached: ->
-        @mainview = 'tabs'
+        @mainview = 'tasks'
         @taskview = 'your'
         @epiclient = new epiquery2.EpiClient([
           "wss://services.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"

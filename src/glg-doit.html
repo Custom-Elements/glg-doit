@@ -7,13 +7,13 @@
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
-<polymer-element name="glg-doit" attributes="mainview taskview data username">
+<polymer-element name="glg-doit" attributes="mainview taskview data username searchstring">
 <template>
-  <event-trap vertical spaced layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
+  <event-trap vertical layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
   <glg-current-user username="{{username}}"></glg-current-user>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
-    <row>
-      <ui-input id="search" placeholder="Search tasks" borderless on-change="{{search}}">
+    <row spaced>
+      <ui-input id="search" placeholder="Search tasks" borderless value="{{searchstring}}">
         <icon search></icon>
       </ui-input>
       <ui-button minimal on-click="{{addTodo}}">
@@ -23,18 +23,8 @@
         </ui-tooltip>
       </ui-button>
     </row>
-    <ui-pages id="mainview" value="{{mainview}}" on-task-save="{{processTaskSave}}">
-      <ui-page value="search">
-        <template if="{{!data.search.length}}">
-          I didn't manage to find anything for you. <icon frown-o></icon>
-        </template>
-        <ui-only-one-expanded>
-          <template repeat="{{task in data.search}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
-          </template>
-        </ui-only-one-expanded>
-      </ui-page>
-      <ui-page id="tabs" value="tabs">
+    <template if="{{!searchstring}}">
+      <row>
         <ui-tabs id="tasknavigation" value="{{taskview}}">
           <ui-tab value="your">
             <div>Your Tasks</div>
@@ -49,6 +39,24 @@
             <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
           </ui-tab>
         </ui-tabs>
+      </row>
+    </template>
+    <template if="{{searchstring}}">
+       <row id="searching">
+       </row>
+    </template>
+    <ui-pages id="mainview" value="{{mainview}}" on-task-save="{{processTaskSave}}">
+      <ui-page value="search">
+        <template if="{{!data.search.length}}">
+          I didn't manage to find anything for you. <icon frown-o></icon>
+        </template>
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.search}}">
+            <glg-task task="{{task}}" username="{{username}}"></glg-task>
+          </template>
+        </ui-only-one-expanded>
+      </ui-page>
+      <ui-page value="tasks">
         <ui-pages id="taskview" value="{{taskview}}">
           <ui-page id="your" value="your">
             <ui-only-one-expanded>
