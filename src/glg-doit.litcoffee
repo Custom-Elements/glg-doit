@@ -120,10 +120,11 @@ This one is a bit simpler than a normal update, just pull it from the lists.
 To the database with you!
 
       processTaskSave: (evt, task) ->
-        rules.validate task, @username
-        console.log 'save', task
-        @epiclient.query 'glglive_o', 'todo/addTask.mustache', task
-        @processTask undefined, task
+        @job task.guid, =>
+          console.log 'save', task
+          rules.validate task, @username
+          @epiclient.query 'glglive_o', 'todo/addTask.mustache', task
+          @processTask undefined, task
 
 ###search
 Process a search, this will:

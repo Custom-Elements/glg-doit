@@ -34,10 +34,17 @@ Asking someone else to do this.
         task?.who is me and task?.delegate
 
 ###delegatedToMe
-I've been asked to do thi.
+I've been asked to do this.
 
       delegatedToMe: (task, me) ->
         task?.who isnt me and task?.delegate is me
+
+
+###justMine
+I've been asked to do this -- by MYSELF!
+
+      justMine: (task, me) ->
+        task?.who is me and not task?.delegate
 
 ###forMe
 All tasks that I need to follow.

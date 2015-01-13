@@ -36,11 +36,11 @@
           </template>
         </ui-only-one-expanded>
       </ui-page>
-      <ui-page value="tabs">
+      <ui-page id="tabs" value="tabs">
         <ui-tabs id="tasknavigation" value="{{taskview}}">
           <ui-tab value="your">
             <div>Your Tasks</div>
-            <ui-attention number>{{data.todo.length | todoNumber}}</ui-attention>
+            <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
           </ui-tab>
           <ui-tab value="delegated">
             <div>Delegated</div>

@@ -49,6 +49,12 @@ I've been asked to do thi.
       delegatedToMe: (task) ->
         rules.delegatedToMe task, @username
 
+###justMine
+Task for me from me.
+
+      justMine: (task) ->
+        rules.justMine task, @username
+
 ###due
 Style things with this filter.
 
