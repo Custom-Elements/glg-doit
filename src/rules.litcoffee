@@ -21,9 +21,9 @@ The done is just a check box, so make sure it is a date.
 
         if task.done
           if moment(task.done).isValid()
-            task.done = moment(task.done).utc().format("YYYY-MM-DD")
+            task.done = moment(task.done).utc().toISOString()
           else
-           task.done = moment().utc().format("YYYY-MM-DD")
+           task.done = moment().utc().toISOString()
 
         task.delegate = task.delegate or ''
 
