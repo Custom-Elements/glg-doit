@@ -7,7 +7,7 @@
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
-<polymer-element name="glg-doit" attributes="mainview taskview data username searchstring"
+<polymer-element name="glg-doit" attributes="taskview data username searchstring"
   on-task="{{processTask}}"
   on-task-delete="{{processTaskDelete}}">
 <template>
@@ -26,27 +26,29 @@
         </ui-button>
       </row>
     </div>
-    <template if="{{!searchstring}}">
-      <ui-tabs id="tasknavigation" value="{{taskview}}">
-        <ui-tab value="your">
-          <div>Your Tasks</div>
-          <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
-        </ui-tab>
-        <ui-tab value="delegated">
-          <div>Delegated</div>
-          <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
-        </ui-tab>
-        <ui-tab value="complete">
-          <div>Complete</div>
-          <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
-        </ui-tab>
-      </ui-tabs>
-    </template>
-    <template if="{{searchstring}}">
-       <div id="searching">
-       </div>
-    </template>
-    <ui-pages id="mainview" value="{{mainview}}" on-task-save="{{processTaskSave}}">
+    <div>
+      <template if="{{!searchstring}}">
+        <ui-tabs id="tasknavigation" value="{{taskview}}">
+          <ui-tab value="your">
+            <div>Your Tasks</div>
+            <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
+          </ui-tab>
+          <ui-tab value="delegated">
+            <div>Delegated</div>
+            <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
+          </ui-tab>
+          <ui-tab value="complete">
+            <div>Complete</div>
+            <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
+          </ui-tab>
+        </ui-tabs>
+      </template>
+      <template if="{{searchstring}}">
+         <div id="searching">
+         </div>
+      </template>
+    </div>
+    <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
       <ui-page value="search">
         <template if="{{!data.search.length}}">
           I didn't manage to find anything for you. <icon frown-o></icon>
@@ -57,31 +59,27 @@
           </template>
         </ui-only-one-expanded>
       </ui-page>
-      <ui-page value="tasks">
-        <ui-pages id="taskview" value="{{taskview}}">
-          <ui-page id="your" value="your">
-            <ui-only-one-expanded>
-              <template repeat="{{task in data.your}}">
-                <glg-task task="{{task}}" username="{{username}}"></glg-task>
-              </template>
-            </ui-only-one-expanded>
-          </ui-page>
-          <ui-page value="delegated">
-            <ui-only-one-expanded>
-              <template repeat="{{task in data.delegated}}">
-                <glg-task task="{{task}}" username="{{username}}"></glg-task>
-              </template>
-            </ui-only-one-expanded>
-          </ui-page>
-          <ui-page value="complete">
-            <ui-only-one-expanded>
-              <template repeat="{{task in data.done}}">
-                <glg-task task="{{task}}" username="{{username}}"></glg-task>
-              </template>
-            </ui-only-one-expanded>
-          </ui-page>
-        </ui-pages>
-      </ui-page>
+        <ui-page id="your" value="your">
+          <ui-only-one-expanded>
+            <template repeat="{{task in data.your}}">
+              <glg-task task="{{task}}" username="{{username}}"></glg-task>
+            </template>
+          </ui-only-one-expanded>
+        </ui-page>
+        <ui-page value="delegated">
+          <ui-only-one-expanded>
+            <template repeat="{{task in data.delegated}}">
+              <glg-task task="{{task}}" username="{{username}}"></glg-task>
+            </template>
+          </ui-only-one-expanded>
+        </ui-page>
+        <ui-page value="complete">
+          <ui-only-one-expanded>
+            <template repeat="{{task in data.done}}">
+              <glg-task task="{{task}}" username="{{username}}"></glg-task>
+            </template>
+          </ui-only-one-expanded>
+        </ui-page>
     </ui-pages>
 </template>
 <script src="./glg-doit.litcoffee"></script>
