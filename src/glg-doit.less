@@ -4,35 +4,29 @@
 @import "../node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome-icons";
 
 :host {
-  position: relative;
-  .full;
+  display: block;
+  overflow: scroll;
+  .border;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  #searchbar {
+    width: 100%;
+  }
   #tasknavigation {
     width: 100%;
   }
   #taskview {
-    flex: 1;
   }
-  #filler {
-    flex: 1;
-    background-color: red;
-  }
-  core-list {
-    min-height: 20em;
-  }
-  event-trap {
-    flex: 1;
-  }
-  row#searching {
+  #searching {
     .border;
     border-top: 0;
     border-left: 0;
     border-right: 0;
   }
-  ui-pages#mainview {
+  #mainview {
     .border;
     border-top: 0;
-  }
-  ui-page#tabs {
   }
   glg-task {
     .top-border;

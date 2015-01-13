@@ -7,43 +7,44 @@
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
-<polymer-element name="glg-doit" attributes="mainview taskview data username searchstring">
+<polymer-element name="glg-doit" attributes="mainview taskview data username searchstring"
+  on-task="{{processTask}}"
+  on-task-delete="{{processTaskDelete}}">
 <template>
-  <event-trap vertical layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
-  <glg-current-user username="{{username}}"></glg-current-user>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
-    <row spaced>
-      <ui-input id="search" placeholder="Search tasks" borderless value="{{searchstring}}">
-        <icon search></icon>
-      </ui-input>
-      <ui-button minimal on-click="{{addTodo}}">
-        <ui-tooltip>
-          <span tip>Add a Todo</span>
-          <icon plus-square></icon>
-        </ui-tooltip>
-      </ui-button>
-    </row>
-    <template if="{{!searchstring}}">
-      <row>
-        <ui-tabs id="tasknavigation" value="{{taskview}}">
-          <ui-tab value="your">
-            <div>Your Tasks</div>
-            <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
-          </ui-tab>
-          <ui-tab value="delegated">
-            <div>Delegated</div>
-            <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
-          </ui-tab>
-          <ui-tab value="complete">
-            <div>Complete</div>
-            <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
-          </ui-tab>
-        </ui-tabs>
+  <glg-current-user username="{{username}}"></glg-current-user>
+    <div>
+      <row id="searchbar" spaced>
+        <ui-input id="search" placeholder="Search tasks" borderless value="{{searchstring}}">
+          <icon search></icon>
+        </ui-input>
+        <ui-button minimal on-click="{{addTodo}}">
+          <ui-tooltip>
+            <span tip>Add a Todo</span>
+            <icon plus-square></icon>
+          </ui-tooltip>
+        </ui-button>
       </row>
+    </div>
+    <template if="{{!searchstring}}">
+      <ui-tabs id="tasknavigation" value="{{taskview}}">
+        <ui-tab value="your">
+          <div>Your Tasks</div>
+          <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
+        </ui-tab>
+        <ui-tab value="delegated">
+          <div>Delegated</div>
+          <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
+        </ui-tab>
+        <ui-tab value="complete">
+          <div>Complete</div>
+          <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
+        </ui-tab>
+      </ui-tabs>
     </template>
     <template if="{{searchstring}}">
-       <row id="searching">
-       </row>
+       <div id="searching">
+       </div>
     </template>
     <ui-pages id="mainview" value="{{mainview}}" on-task-save="{{processTaskSave}}">
       <ui-page value="search">
@@ -82,7 +83,6 @@
         </ui-pages>
       </ui-page>
     </ui-pages>
-  </event-trap>
 </template>
 <script src="./glg-doit.litcoffee"></script>
 </polymer-element>
