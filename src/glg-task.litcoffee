@@ -88,8 +88,9 @@ search often, then present them for selection in the ui-typeahead via binding.
         @fadeOut =>
           @fire 'task-delete', @task
 
-      saveTodo: (evt) ->
-        @$.preview.collapse =>
+      saveTodoIfEditing: (evt) ->
+        evt.stopPropagation()
+        if @$.preview.hasAttribute 'expanded'
           @fire 'task-save', @task
 
       doneTodo: (evt) ->

@@ -50,7 +50,7 @@
       </ui-form>
     </preview>
     <full>
-      <ui-form>
+      <ui-form on-change="{{saveTodoIfEditing}}">
         <row spaced padded>
           <column>
             <ui-check padded value="{{task.done}}"></ui-check>
@@ -88,7 +88,6 @@
                   <icon trash></icon>
                 </ui-tooltip>
               </ui-button>
-              <ui-button on-click="{{saveTodo}}">Save</ui-button>
             </row>
           </column>
         </row>
