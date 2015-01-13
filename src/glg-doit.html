@@ -5,14 +5,12 @@
 <link rel="import" href="../node_modules/glg-current-user/src/glg-current-user.html">
 <link rel="import" href="../node_modules/ui-button/src/ui-button.html">
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
-<link rel="import" href="../node_modules/core-custom-event-client/src/core-custom-event-client.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
 <polymer-element name="glg-doit" attributes="mainview taskview data username">
 <template>
-  <event-trap vertical layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
+  <event-trap vertical spaced layout on-task="{{processTask}}" on-task-delete="{{processTaskDelete}}">
   <glg-current-user username="{{username}}"></glg-current-user>
-  <core-custom-event-client id="bus"></core-custom-event-client>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
     <row>
       <ui-input id="search" placeholder="Search tasks" borderless on-change="{{search}}">
