@@ -78,11 +78,6 @@ search often, then present them for selection in the ui-typeahead via binding.
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
 
-      addTaskResponse: (evt, detail) ->
-        console.log 'task back from server', arguments
-
-      addTaskError: (evt, detail) ->
-        console.log 'error back from server', arguments
 
       deleteTodo: ->
         @fadeOut =>

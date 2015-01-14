@@ -36,9 +36,6 @@
               <template if="{{delegatedToMe(task)}}">
                 For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar>&nbsp;
               </template>
-              <template if="{{justMine(task)}}">
-                <glg-avatar username="{{task.who}}"></glg-avatar>&nbsp;
-              </template>
               <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
             </row>
             <template if="{{task.done}}">
@@ -71,7 +68,7 @@
             <ui-typeahead  placeholder="Delegate To?" value="{{task.delegate}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}">
               <template value>
                 <value>
-                  <glg-avatar username="{{}}"></glg-avatar>
+                  <glg-avatar micropadded username="{{}}"></glg-avatar>
                 </value>
               </template>
               <template repeat="{{coworkers}}">

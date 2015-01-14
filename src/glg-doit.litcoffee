@@ -33,7 +33,8 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
             @epiclient.query 'glglive_o', 'todo/listChanges.mustache',
               username: @username
               next_baseline: @next_baseline
-        , 30000
+            , 'poll'
+        , 1000
 
 ##Methods
 ###addTodo
@@ -46,7 +47,6 @@ to allow data entry.
       addTodo: ->
         if @taskview isnt 'your'
           hando = =>
-            console.log 'handy'
             @removeEventListener 'onpage', hando
             @addTodo()
           @addEventListener 'onpage', hando
@@ -99,8 +99,10 @@ Any other task isn't your problem!
         @data.done = @data.done or []
         @data.all = @data.all or {}
 
-        task = _.extend @data.all[task.guid] or {}, task
-        @data.all[task.guid] = task
+        if @data.all[task.guid]
+          task = _.extend @data.all[task.guid] or {}, task
+        else
+          @data.all[task.guid] = task
 
         if task.done
           _.remove @data.delegated, (x) -> x.guid is task.guid

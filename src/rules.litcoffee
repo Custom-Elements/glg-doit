@@ -25,7 +25,7 @@ The done is just a check box, so make sure it is a date.
           else
            task.done = moment().utc().toISOString()
 
-        task.delegate = task.delegate or ''
+
 
 ###delegatedOut
 Asking someone else to do this.
