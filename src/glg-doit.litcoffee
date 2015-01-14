@@ -150,9 +150,9 @@ Process a search, this will:
 * swap the UI out with a data bound list or search results
 
       search: (evt) ->
-        if (@index?.at_revision or 0) isnt @next_revision
+        if (@index?.at_revision or 0) isnt @next_baseline
           @index = new hummingbird.Index()
-          @index.at_revision = @next_revision or 0
+          @index.at_revision = @next_baseline or 0
           Object.keys(@data.all).forEach (guid) =>
             task = @data.all[guid]
             @index.add
