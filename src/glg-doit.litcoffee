@@ -40,7 +40,18 @@ Who am I? Once we know a user, kick off a query to get all your tasks.
 Adding a todo will check for a 'your' task that is blank to avoid a long
 string of blank tasks. Otherwise -- it just pushes a new task on the list.
 
+This has a one time event handler to make sure we are on the 'your' tab
+to allow data entry.
+
       addTodo: ->
+        if @taskview isnt 'your'
+          hando = =>
+            console.log 'handy'
+            @removeEventListener 'onpage', hando
+            @addTodo()
+          @addEventListener 'onpage', hando
+          @taskview = 'your'
+          return
         focusOnBlankElement = =>
           taskElements = @shadowRoot.querySelectorAll('#your glg-task').array()
           for taskElement in taskElements
