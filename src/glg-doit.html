@@ -31,15 +31,15 @@
         <ui-tabs id="tasknavigation" value="{{taskview}}">
           <ui-tab value="your">
             <div>Your Tasks</div>
-            <ui-attention number>{{data.your.length | todoNumber}}</ui-attention>
+            <ui-attention number>{{data.your}}</ui-attention>
           </ui-tab>
           <ui-tab value="delegated">
             <div>Delegated</div>
-            <ui-attention number>{{data.delegated.length | todoNumber}}</ui-attention>
+            <ui-attention number>{{data.delegated}}</ui-attention>
           </ui-tab>
           <ui-tab value="complete">
             <div>Complete</div>
-            <ui-attention number>{{data.done.length | todoNumber}}</ui-attention>
+            <ui-attention number>{{data.completed}}</ui-attention>
           </ui-tab>
         </ui-tabs>
       </template>
@@ -48,39 +48,22 @@
          </div>
       </template>
     </div>
-    <ui-pages id="taskview" value="{{taskview}}" on-task-save="{{processTaskSave}}">
-      <ui-page value="search">
-        <template if="{{!data.search.length}}">
+    <template if="{{data.search && !data.search.length}}">
+      I didn't manage to find anything for you. <icon frown-o></icon>
+    </template>
+    <ui-only-one-expanded id="tasklist" on-task-save="{{processTaskSave}}">
+      <template if="{{data.search && !data.search.length}}">
+        <div>
           I didn't manage to find anything for you. <icon frown-o></icon>
-        </template>
-        <ui-only-one-expanded>
-          <template repeat="{{task in data.search}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
-          </template>
-        </ui-only-one-expanded>
-      </ui-page>
-        <ui-page id="your" value="your">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.your}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-        <ui-page value="delegated">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.delegated}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-        <ui-page value="complete">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.done}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-    </ui-pages>
+        </div>
+      </template>
+      <template repeat="{{task in data.search}}">
+        <glg-task task="{{task}}" username="{{username}}"></glg-task>
+      </template>
+      <template repeat="{{task in data}}">
+        <glg-task task="{{task}}" username="{{username}}" filtered?="{{task.filtered}}"></glg-task>
+      </template>
+    </ui-only-one-expanded>
 </template>
 <script src="./glg-doit.litcoffee"></script>
 </polymer-element>

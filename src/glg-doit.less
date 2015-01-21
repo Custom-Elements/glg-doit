@@ -30,15 +30,21 @@
     border-top: 0;
   }
   glg-task {
-    .top-border;
+    .bottom-border;
   }
-  glg-task:first-of-type {
-    border: 0;
+  glg-task[filtered] {
+    display: none;
   }
   ui-button{
     icon{
       padding-left: 1px;
       padding-right: 1px;
     }
+  }
+  #tasklist {
+    overflow: auto;
+    flex: 1;
+    .border;
+    border-top: none;
   }
 }

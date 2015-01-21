@@ -31,14 +31,13 @@ The done is just a check box, so make sure it is a date.
 Asking someone else to do this.
 
       delegatedOut: (task, me) ->
-        task?.who is me and task?.delegate
+        task?.delegate? and task?.delegate isnt me
 
 ###delegatedToMe
 I've been asked to do this.
 
       delegatedToMe: (task, me) ->
         task?.who isnt me and task?.delegate is me
-
 
 ###justMine
 I've been asked to do this -- by MYSELF!
