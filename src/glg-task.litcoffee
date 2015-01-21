@@ -66,10 +66,11 @@ Search for coworkers to delegate. This will trigger an autocomplete style
 search often, then present them for selection in the ui-typeahead via binding.
 
       searchCoworkers: (evt, query) ->
+        console.log 'search', query
         @$.coworkers.body = JSON.stringify
           query:
             match:
-              name: query.value
+              name: query?.value
         @$.coworkers.go()
 
 ##Event Handlers
@@ -98,8 +99,11 @@ checked task would just flash out of existence.
 Get down to the business of editing.
 
       focus: ->
-        @$.preview.expand =>
-          @$.what.focus()
+        @$.preview.expand()
+          
+      focusEdit: ->
+        @$.what.focus()
+
 
 ##Polymer Lifecycle
 

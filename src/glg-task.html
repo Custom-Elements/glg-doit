@@ -10,7 +10,6 @@
 <template>
   <core-ajax
     id="coworkers"
-    auto
     method="POST"
     url="https://services.glgresearch.com/cerca/employees/_search"
     body='{"query":{"match":{"name":"balla"}}}'
@@ -19,7 +18,7 @@
     on-core-response="{{coworkersResponse}}"></core-ajax>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task.less">
-  <ui-preview id="preview" on-expanded="{{focus}}">
+  <ui-preview id="preview" on-expanded="{{focusEdit}}">
     <preview>
       <ui-form>
         <row spaced padded>
@@ -50,7 +49,7 @@
       <ui-form on-change="{{saveTodoIfEditing}}">
         <row spaced padded>
           <column>
-            <ui-check padded value="{{task.done}}"></ui-check>
+            <ui-check value="{{task.done}}"></ui-check>
           </column>
           <column spaced fill>
             <ui-input placeholder="What?" id="what" multiline="2" value="{{task.what}}">
