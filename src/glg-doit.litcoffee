@@ -49,10 +49,10 @@ to allow data entry.
 
       addTodo: ->
         focusOnBlankElement = =>
-          taskElements = @shadowRoot.querySelectorAll('glg-task').array()
+          taskElements = @shadowRoot.querySelectorAll('glg-task-preview').array()
           for taskElement in taskElements
             if not taskElement.templateInstance.model.task.what and not taskElement.hasAttribute('hidden')
-              taskElement.focus()
+              @processTaskEdit undefined, taskElement.templateInstance.model.task
               return true
           false
         if not focusOnBlankElement()
@@ -82,19 +82,22 @@ Any done task is just that.
 Any other task isn't your problem!
 
       processTask: (evt, task) ->
-        console.log 'processing', task
         @next_baseline = task.next_baseline or @next_baseline
-        rules.validate task, @username
-
-        existingTask = @data.filter (t) =>
-          task.guid is t.guid
-
-        if existingTask[0]
-          task = _.extend existingTask[0], task
+        if task?.guid is @editTask?.guid
+          console.log 'in process editing', task
         else
-          @data.push task
+          console.log 'processing', task
+          rules.validate task, @username
 
-        @updateView()
+          existingTask = @data.filter (t) =>
+            task.guid is t.guid
+
+          if existingTask[0]
+            task = _.extend existingTask[0], task
+          else
+            @data.push task
+
+          @updateView()
 
       updateView: ->
         @data.your = 0
@@ -119,7 +122,9 @@ This one is a bit simpler than a normal update, just pull it from the lists.
 
       processTaskDelete: (evt, task) ->
         console.log 'delete', task
-        _.remove @data, task
+        _.remove @data, (t) -> t.guid is task.guid
+        if @editTask?.guid is task?.guid
+          @editTask = null
         @epiclient.query 'glglive_o', 'todo/deleteTask.mustache', task
 
 ###processTaskSave
@@ -137,7 +142,6 @@ To the database with you!
 Edit a single task record.
 
       processTaskEdit: (evt, task) ->
-        console.log task
         @editTask = task
         @async ->
          @$.navigation.push @$.taskedit
