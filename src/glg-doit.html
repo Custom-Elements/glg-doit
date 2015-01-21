@@ -15,7 +15,6 @@
   <glg-current-user username="{{username}}"></glg-current-user>
   <ui-navigation id="navigation">
     <ui-view expand id="lists">
-      <column expand>
         <div>
           <row id="searchbar" spaced>
             <ui-input id="search" placeholder="Search tasks" borderless value="{{searchstring}}">
@@ -64,7 +63,6 @@
             <glg-task-preview task="{{task}}" username="{{username}}" filtered?="{{task.filtered}}"></glg-task-preview>
           </template>
         </column>
-      </column>
     </ui-view>
   </ui-navigation>
 </template>

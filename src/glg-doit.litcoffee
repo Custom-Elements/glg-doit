@@ -155,6 +155,7 @@ Process a search, this will:
             @data.search = results.map (x) -> x.task
             @taskview = 'search'
         else
+          @data.search = []
           @taskview = 'your'
 
 ##Polymer Lifecycle
