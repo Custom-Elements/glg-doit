@@ -7,6 +7,7 @@
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
 <link rel="import" href="./glg-task.html">
+<link rel="import" href="./glg-task-preview.html">
 <polymer-element name="glg-doit" attributes="taskview data username searchstring"
   on-task="{{processTask}}"
   on-task-delete="{{processTaskDelete}}">
@@ -55,31 +56,31 @@
         </template>
         <ui-only-one-expanded>
           <template repeat="{{task in data.search}}">
-            <glg-task task="{{task}}" username="{{username}}"></glg-task>
+            <glg-task-preview task="{{task}}" username="{{username}}"></glg-task-preview>
           </template>
         </ui-only-one-expanded>
       </ui-page>
-        <ui-page id="your" value="your">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.your}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-        <ui-page value="delegated">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.delegated}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
-        <ui-page value="complete">
-          <ui-only-one-expanded>
-            <template repeat="{{task in data.done}}">
-              <glg-task task="{{task}}" username="{{username}}"></glg-task>
-            </template>
-          </ui-only-one-expanded>
-        </ui-page>
+      <ui-page id="your" value="your">
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.your}}">
+            <glg-task-preview task="{{task}}" username="{{username}}"></glg-task-preview>
+          </template>
+        </ui-only-one-expanded>
+      </ui-page>
+      <ui-page value="delegated">
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.delegated}}">
+            <glg-task-preview task="{{task}}" username="{{username}}"></glg-task-preview>
+          </template>
+        </ui-only-one-expanded>
+      </ui-page>
+      <ui-page value="complete">
+        <ui-only-one-expanded>
+          <template repeat="{{task in data.done}}">
+            <glg-task-preview task="{{task}}" username="{{username}}"></glg-task-preview>
+          </template>
+        </ui-only-one-expanded>
+      </ui-page>
     </ui-pages>
 </template>
 <script src="./glg-doit.litcoffee"></script>

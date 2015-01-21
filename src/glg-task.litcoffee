@@ -2,7 +2,6 @@
 This is a single task UI.
 
     moment = require 'moment'
-    _ = require 'lodash'
     require '../node_modules/ui-styles/animations'
 
     rules = require './rules.litcoffee'
@@ -77,7 +76,6 @@ search often, then present them for selection in the ui-typeahead via binding.
 
       coworkersResponse: (evt, detail)->
         @coworkers = detail?.response?.hits?.hits?.map (result) -> result._source
-
 
       deleteTodo: ->
         @fadeOut =>
