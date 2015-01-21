@@ -60,10 +60,9 @@ search often, then present them for selection in the ui-typeahead via binding.
         @fadeOut =>
           @fire 'task-delete', @task
 
-      saveTodoIfEditing: (evt) ->
+      saveTodo: (evt) ->
         evt.stopPropagation()
-        if @$.preview.hasAttribute 'expanded'
-          @fire 'task-save', @task
+        @fire 'task-save', @task
 
       goBack: (evt) ->
         evt.stopPropagation()

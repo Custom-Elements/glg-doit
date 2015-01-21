@@ -30,11 +30,11 @@
         </ui-tooltip>
       </ui-button>
     </row>
-    <row expand spaced padded on-change="{{saveTodoIfEditing}}">
+    <row expand spaced padded on-change="{{saveTodo}}">
       <column>
         <ui-check value="{{task.done}}"></ui-check>
       </column>
-      <column spaced fill>
+      <column spaced expand>
         <ui-input placeholder="When?" type="date" value="{{task.when}}" class="{{due(task.when)}}">
           <preview>{{task.when | relativeDate}}</preview>
         </ui-input>
@@ -54,7 +54,7 @@
             </ui-typeahead-item>
           </template>
         </ui-typeahead>
-        <ui-input placeholder="What?" id="what" multiline="2" value="{{task.what}}">
+        <ui-input expand placeholder="What?" id="what" multiline="true" value="{{task.what}}">
           <preview>
             <ui-markdown value="{{task.what}}">
             </ui-markdown>
