@@ -83,8 +83,6 @@ Any other task isn't your problem!
 
       processTask: (evt, task) ->
         console.log 'processing', task
-        if not @editTask
-          @processTaskEdit undefined, task
         @next_baseline = task.next_baseline or @next_baseline
         rules.validate task, @username
 

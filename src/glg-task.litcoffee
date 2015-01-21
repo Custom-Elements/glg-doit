@@ -58,7 +58,9 @@ search often, then present them for selection in the ui-typeahead via binding.
 
       deleteTodo: ->
         @fadeOut =>
+          @removeAttribute 'hidden'
           @fire 'task-delete', @task
+          @fire 'go-back'
 
       saveTodo: (evt) ->
         evt.stopPropagation()
@@ -67,7 +69,6 @@ search often, then present them for selection in the ui-typeahead via binding.
       goBack: (evt) ->
         evt.stopPropagation()
         @fire 'go-back'
-
 
 ##Polymer Lifecycle
 

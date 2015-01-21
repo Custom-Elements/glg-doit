@@ -31,7 +31,7 @@ The done is just a check box, so make sure it is a date.
 Asking someone else to do this.
 
       delegatedOut: (task, me) ->
-        task?.delegate? and task?.delegate isnt me
+        task?.delegate?.length and task?.delegate isnt me
 
 ###delegatedToMe
 I've been asked to do this.

@@ -5,26 +5,31 @@
 <template>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task-preview.less">
-  <row spaced padded on-click="{{editTodo}}">
+  <row spaced expand padded on-click="{{editTodo}}">
     <column>
       <ui-check value="{{task.done}}" on-click="{{doneTodo}}"></ui-check>
     </column>
-    <column fill>
+    <column expand>
       <ui-markdown value="{{task.what}}">
       </ui-markdown>
-      <row centered>
-        <template if="{{delegatedOut(task)}}">
+      <row start expand centered>
+        <template if="{{task.delegate}}">
           To&nbsp;<glg-avatar username="{{task.delegate}}"></glg-avatar>&nbsp;
         </template>
         <template if="{{delegatedToMe(task)}}">
           For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar>&nbsp;
         </template>
-        <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
       </row>
-      <template if="{{task.done}}">
-        <linefeed></linefeed>
-        Done {{task.done | relativeDate}}
+      <template if="{{task.when}}">
+        <row>
+          <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
+        </row>
       </template>
+      <row>
+        <template if="{{task.done}}">
+          Done {{task.done | relativeDate}}
+        </template>
+      </row>
     </column>
   </row>
 </template>
