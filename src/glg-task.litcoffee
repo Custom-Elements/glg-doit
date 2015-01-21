@@ -1,14 +1,16 @@
-#glg-doit
+#glg-task
 This is a single task UI.
 
-    moment = require 'moment'
     require '../node_modules/ui-styles/animations'
 
     rules = require './rules.litcoffee'
     Polymer 'glg-task',
 
 ##Events
-###task
+###go-back
+Navigate away.
+
+###task-save
 Fired when a task is in any way updated.
 
 ###task-delete
@@ -27,39 +29,15 @@ Pick the login name out of an autocomplete person.
       pluckUsername: (person) ->
         person?.username
 
-###relativeDate
-Display filter for dates. Modern styling.
+      relativeDate: rules.relativeDate
 
-      relativeDate: (value) ->
-        if value
-          moment(value?.toUTCString?() or value).fromNow()
-        else
-          ""
-
-###delegatedOut
-Asking someone else to do this.
-
-      delegatedOut: (task) ->
-        rules.delegatedOut task, @username
+      due: rules.due
 
 ###delegatedToMe
-I've been asked to do thi.
+I've been asked to do this.
 
       delegatedToMe: (task) ->
         rules.delegatedToMe task, @username
-
-###justMine
-Task for me from me.
-
-      justMine: (task) ->
-        rules.justMine task, @username
-
-###due
-Style things with this filter.
-
-      due: (at) ->
-        if at < Date.now()
-          "red"
 
 ###searchCoworkers
 Search for coworkers to delegate. This will trigger an autocomplete style
@@ -87,22 +65,9 @@ search often, then present them for selection in the ui-typeahead via binding.
         if @$.preview.hasAttribute 'expanded'
           @fire 'task-save', @task
 
-      doneTodo: (evt) ->
+      goBack: (evt) ->
         evt.stopPropagation()
-        @fire 'task-save', @task
-
-###completeChange
-Capture the change event on a check to allow for an animation, otherwise the
-checked task would just flash out of existence.
-
-##focus
-Get down to the business of editing.
-
-      focus: ->
-        @$.preview.expand()
-          
-      focusEdit: ->
-        @$.what.focus()
+        @fire 'go-back'
 
 
 ##Polymer Lifecycle

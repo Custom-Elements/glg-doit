@@ -7,13 +7,13 @@
 <link rel="import" href="../node_modules/ui-attention/src/ui-attention.html">
 <link rel="import" href="./glg-task.html">
 <link rel="import" href="./glg-task-preview.html">
-<polymer-element name="glg-doit" attributes="taskview data username searchstring"
+<polymer-element name="glg-doit" attributes="taskview data username searchstring editTask"
   on-task="{{processTask}}"
   on-task-delete="{{processTaskDelete}}">
 <template>
   <link rel="stylesheet" type="text/css" href="./glg-doit.less">
   <glg-current-user username="{{username}}"></glg-current-user>
-  <ui-navigation id="navigation">
+  <ui-navigation id="navigation" on-task-save="{{processTaskSave}}" on-task-edit="{{processTaskEdit}}">
     <ui-view expand id="lists">
         <div>
           <row id="searchbar" spaced>
@@ -63,6 +63,9 @@
             <glg-task-preview task="{{task}}" username="{{username}}" filtered?="{{task.filtered}}"></glg-task-preview>
           </template>
         </column>
+    </ui-view>
+    <ui-view expand id="taskedit">
+      <glg-task task="{{editTask}}" username="{{username}}"></glg-task>
     </ui-view>
   </ui-navigation>
 </template>

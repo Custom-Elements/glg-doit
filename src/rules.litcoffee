@@ -50,3 +50,19 @@ All tasks that I need to follow.
 
       forMe: (task, me) ->
         rules.delegatedToMe(task, me) or (task?.who is me and not task?.delegate)
+
+###relativeDate
+Display filter for dates. Modern styling.
+
+      relativeDate: (value) ->
+        if value
+          moment(value?.toUTCString?() or value).fromNow()
+        else
+          ""
+
+###due
+Style things with this filter.
+
+      due: (at) ->
+        if at < Date.now()
+          "red"

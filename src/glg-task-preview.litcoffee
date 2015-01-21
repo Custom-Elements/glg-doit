@@ -6,23 +6,20 @@ This is a single task UI in preview -- not edit -- mode
     Polymer 'glg-task-preview',
 
 ##Events
-###task
+###task-save
 Fired when a task is in any way updated.
+
+###task-edit
+Time to get the UI to switch into an edit for a specific task.
 
 ##Attributes and Change Handlers
 ###task
-h result of your coworkers.
 
 ##Methods
 
-###relativeDate
-Display filter for dates. Modern styling.
+      relativeDate: rules.relativeDate
 
-      relativeDate: (value) ->
-        if value
-          moment(value?.toUTCString?() or value).fromNow()
-        else
-          ""
+      due: rules.due
 
 ###delegatedOut
 Asking someone else to do this.
@@ -31,7 +28,7 @@ Asking someone else to do this.
         rules.delegatedOut task, @username
 
 ###delegatedToMe
-I've been asked to do thi.
+I've been asked to do this.
 
       delegatedToMe: (task) ->
         rules.delegatedToMe task, @username
@@ -42,18 +39,15 @@ Task for me from me.
       justMine: (task) ->
         rules.justMine task, @username
 
-###due
-Style things with this filter.
-
-      due: (at) ->
-        if at < Date.now()
-          "red"
-
 ##Event Handlers
 
       doneTodo: (evt) ->
         evt.stopPropagation()
         @fire 'task-save', @task
+
+      editTodo: (evt) ->
+        evt.stopPropagation()
+        @fire 'task-edit', @task
 
 ##Polymer Lifecycle
 

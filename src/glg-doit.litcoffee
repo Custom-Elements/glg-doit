@@ -83,6 +83,8 @@ Any other task isn't your problem!
 
       processTask: (evt, task) ->
         console.log 'processing', task
+        if not @editTask
+          @processTaskEdit undefined, task
         @next_baseline = task.next_baseline or @next_baseline
         rules.validate task, @username
 
@@ -119,10 +121,7 @@ This one is a bit simpler than a normal update, just pull it from the lists.
 
       processTaskDelete: (evt, task) ->
         console.log 'delete', task
-        delete @data.all[task.guid]
-        _.remove @data.delegated, (x) -> x.guid is task.guid
-        _.remove @data.your, (x) -> x.guid is task.guid
-        _.remove @data.done, (x) -> x.guid is task.guid
+        _.remove @data, task
         @epiclient.query 'glglive_o', 'todo/deleteTask.mustache', task
 
 ###processTaskSave
@@ -134,6 +133,16 @@ To the database with you!
           console.log 'save', task
           @epiclient.query 'glglive_o', 'todo/addTask.mustache', task
           @processTask undefined, task
+
+
+###processTaskEdit
+Edit a single task record.
+
+      processTaskEdit: (evt, task) ->
+        console.log task
+        @editTask = task
+        @async ->
+         @$.navigation.push @$.taskedit
 
 ###search
 Process a search, this will:

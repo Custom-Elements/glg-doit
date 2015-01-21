@@ -5,7 +5,7 @@
 <template>
   <link rel="stylesheet" href="../node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
   <link rel="stylesheet" type="text/css" href="./glg-task-preview.less">
-  <row spaced padded>
+  <row spaced padded on-click="{{editTodo}}">
     <column>
       <ui-check value="{{task.done}}" on-click="{{doneTodo}}"></ui-check>
     </column>
