@@ -23,6 +23,7 @@
     "ui-preview": "git://github.com/custom-elements/ui-preview#master",
     "ui-styles": "git://github.com/custom-elements/ui-styles#master",
     "ui-tab": "git://github.com/custom-elements/ui-tab#master",
+    "ui-navigation": "git://github.com/custom-elements/ui-navigation#master",
     "ui-typeahead": "git://github.com/custom-elements/ui-typeahead#master"
   },
   "license": "ISC",
