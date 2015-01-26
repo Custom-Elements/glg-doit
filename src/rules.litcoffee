@@ -64,5 +64,5 @@ Display filter for dates. Modern styling.
 Style things with this filter.
 
       due: (at) ->
-        if at < Date.now()
+        if moment(at) < Date.now()
           "red"
