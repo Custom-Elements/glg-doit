@@ -29,7 +29,7 @@
       </template>
       <row>
         <template if="{{task.done}}">
-          Done {{task.done | relativeDate}}
+          <small gray>Completed {{task.done | relativeDate}}</small>
         </template>
       </row>
     </column>
