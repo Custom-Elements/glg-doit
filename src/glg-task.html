@@ -36,12 +36,14 @@
       </column>
       <column spaced expand>
         <ui-input placeholder="When?" type="date" value="{{task.when}}" class="{{due(task.when)}}">
+          <icon calendar></icon>
           <preview>{{task.when | relativeDate}}</preview>
         </ui-input>
         <template if="{{delegatedToMe(task)}}">
-          <row centered>For&nbsp;<glg-avatar username="{{task.who}}"></glg-avatar></row>
+          <row inherit centered><span>For&nbsp;&nbsp;</span><glg-avatar username="{{task.who}}"></glg-avatar></row>
         </template>
         <ui-typeahead  placeholder="Delegate To?" value="{{task.delegate}}" valueFilter="{{pluckUsername}}" on-inputchange="{{searchCoworkers}}">
+          <icon user></icon>
           <template value>
             <value>
               <glg-avatar micropadded username="{{}}"></glg-avatar>
@@ -55,6 +57,7 @@
           </template>
         </ui-typeahead>
         <ui-input expand placeholder="What?" id="what" multiline="true" value="{{task.what}}">
+          <icon quote-left></icon>
           <preview>
             <ui-markdown value="{{task.what}}">
             </ui-markdown>

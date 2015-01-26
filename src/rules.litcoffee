@@ -31,25 +31,25 @@ The done is just a check box, so make sure it is a date.
 Asking someone else to do this.
 
       delegatedOut: (task, me) ->
-        task?.delegate?.length and task?.delegate isnt me
+        task?.delegate?.length and task?.delegate?.toLowerCase() isnt me?.toLowerCase() and task?.who?.toLowerCase()is me?.toLowerCase()
 
 ###delegatedToMe
 I've been asked to do this.
 
       delegatedToMe: (task, me) ->
-        task?.who isnt me and task?.delegate is me
+        task?.who?.toLowerCase() isnt me?.toLowerCase() and task?.delegate is me?.toLowerCase()
 
 ###justMine
 I've been asked to do this -- by MYSELF!
 
       justMine: (task, me) ->
-        task?.who is me and not task?.delegate
+        task?.who?.toLowerCase() is me?.toLowerCase() and not task?.delegate
 
 ###forMe
 All tasks that I need to follow.
 
       forMe: (task, me) ->
-        rules.delegatedToMe(task, me) or (task?.who is me and not task?.delegate)
+        rules.delegatedToMe(task, me) or rules.justMine(task, me)
 
 ###relativeDate
 Display filter for dates. Modern styling.
