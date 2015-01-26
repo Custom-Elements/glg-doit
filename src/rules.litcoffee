@@ -37,7 +37,7 @@ Asking someone else to do this.
 I've been asked to do this.
 
       delegatedToMe: (task, me) ->
-        task?.who?.toLowerCase() isnt me?.toLowerCase() and task?.delegate is me?.toLowerCase()
+        task?.delegate?.toLowerCase() is me?.toLowerCase()
 
 ###justMine
 I've been asked to do this -- by MYSELF!
