@@ -50,7 +50,7 @@
            </div>
         </template>
         </div>
-        <column expand id="tasklist">
+        <list expand id="tasklist">
           <template if="{{searchstring && data.search && !data.search.length}}">
             <span padded>
               I didn't manage to find anything for you. <icon frown-o></icon>
@@ -62,7 +62,7 @@
           <template repeat="{{task in data}}">
             <glg-task-preview task="{{task}}" username="{{username}}" filtered?="{{task.filtered}}"></glg-task-preview>
           </template>
-        </column>
+        </list>
     </ui-view>
     <ui-view expand id="taskedit">
       <glg-task expand task="{{editTask}}" username="{{username}}"></glg-task>
