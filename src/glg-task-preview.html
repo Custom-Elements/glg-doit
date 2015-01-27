@@ -22,12 +22,14 @@
       </row>
       <template if="{{task.when}}">
         <row>
-          <span class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
+          <small>
+            <span gray class="{{due(task.when)}}">{{task.when | relativeDate}}</span>
+          </small>
         </row>
       </template>
       <row>
         <template if="{{task.done}}">
-          Done {{task.done | relativeDate}}
+          <small gray>Completed {{task.done | relativeDate}}</small>
         </template>
       </row>
     </column>
