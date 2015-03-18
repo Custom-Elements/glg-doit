@@ -182,11 +182,11 @@ the server as from the client.
       attached: ->
         @taskview = 'your'
         @epiclient = new epiquery2.EpiClient([
-          "wss://services.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"
-          "wss://east.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"
-          "wss://west.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"
-          "wss://europe.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"
-          "wss://asia.glgresearch.com/epistream-consultations-clustered/sockjs/websocket"
+          "wss://services.glgresearch.com/epi-streaming/sockjs/websocket"
+          "wss://east.glgresearch.com/epi-streaming/sockjs/websocket"
+          "wss://west.glgresearch.com/epi-streaming/sockjs/websocket"
+          "wss://europe.glgresearch.com/epi-streaming/sockjs/websocket"
+          "wss://asia.glgresearch.com/epi-streaming/sockjs/websocket"
           ]);
         @epiclient.on 'row', (row) =>
           @processTask undefined, row.columns
